@@ -11,7 +11,7 @@
 
 import { Deck } from './Deck.js'
 import { Player } from './Player.js'
-// import { Hand } from './Hand.js'
+// import { Dealer } from './Dealer.js'
 
 try {
   // Create 52 playing cards and...
