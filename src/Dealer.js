@@ -16,4 +16,17 @@ export class Dealer {
     const fullHand = Hand.restOfCards(playingCards, firstCard)
     return fullHand
   }
+
+  /**
+   * Returns a string representing the dealer hand.
+   *
+   * @param {object[]} playingCards An array with PlayingCard objects.
+   * @returns {string} A string representing the player hand.
+   */
+  toString (playingCards) {
+    const dealerArray = this.dealerHand(playingCards)
+    const cardsOfDealerHand = dealerArray.slice(0, dealerArray.length - 1)
+    const sumOfDealerHand = dealerArray.slice(-1)
+    return `Dealer   : ${cardsOfDealerHand.join(' ')} (${sumOfDealerHand})\n`
+  }
 }

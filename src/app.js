@@ -11,7 +11,7 @@
 
 import { Deck } from './Deck.js'
 import { Player } from './Player.js'
-// import { Dealer } from './Dealer.js'
+import { Dealer } from './Dealer.js'
 
 try {
   // Create 52 playing cards and...
@@ -27,8 +27,10 @@ try {
       playingCards = Deck.shuffle(playingCards)
     }
     const player = new Player(i)
+    const dealer = new Dealer()
     const firstCard = player.playerFirstCard(playingCards)
-    console.log(player.playerHand(playingCards, firstCard))
+    console.log(player.toString(playingCards, firstCard))
+    console.log(dealer.toString(playingCards))
   }
 } catch (e) {
   console.error(e.message)
