@@ -36,7 +36,7 @@ export class Hand {
     let sumOfHand = first.pop()
     const cardArray = [first.pop()]
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-    const stop = Math.floor(Math.random() * (19 - 14) + 14)
+    const stop = Math.floor(Math.random() * (17 - 12) + 13)
     let outcome = ''
     while (sumOfHand < stop) {
       const getNewCard = Array.from(this.firstCard(playingCards))

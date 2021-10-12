@@ -18,6 +18,7 @@ try {
   // ...shuffle them.
   Deck.shuffle(playingCards)
 
+  //Fruktansvärd kod, måste ändras!
   const numberOfPlayers = Number(process.argv.pop())
   const dealer = new Dealer()
   for (let i = 1; i <= numberOfPlayers; i++) {
@@ -27,8 +28,32 @@ try {
     }
     const player = new Player(i)
     const firstCard = player.playerFirstCard(playingCards)
-    console.log(player.toString(playingCards, firstCard))
-    console.log(dealer.toString(playingCards))
+    const playerResult = player.toString(playingCards, firstCard)
+    if (playerResult.search('WIN') !== -1) {
+      console.log(playerResult + '\nDealer: -\nPlayer wins')
+    } else if (playerResult.search('LOSE') !== -1) {
+      console.log(playerResult + ' BUSTED!\nDealer: -\nDealer wins!')
+    } else {
+      const dealerResult = dealer.toString(playingCards)
+      if (dealerResult.search('WIN') !== -1) {
+        console.log(playerResult + `\n${dealerResult}\nDealer wins!`)
+      } else if (dealerResult.search('LOSE') !== -1) {
+        console.log(playerResult + `\n${dealerResult} BUSTED!\nPlayer wins!`)
+      } else {
+        const dealerArray = dealerResult.split(' ')
+        let dealerPoints = dealerArray.splice(-1).pop()
+        dealerPoints = Number(dealerPoints.charAt(1) + dealerPoints.charAt(2))
+        const playerArray = playerResult.split(' ')
+        let playerPoints = playerArray.splice(-1).pop()
+        playerPoints = Number(playerPoints.charAt(1) + playerPoints.charAt(2))
+        console.log(playerResult + '\n' + dealerResult)
+        if (playerPoints > dealerPoints) {
+          console.log('Player wins!\n')
+        } else {
+          console.log('Dealer wins!\n')
+        }
+      }
+    }
   }
 } catch (e) {
   console.error(e.message)
