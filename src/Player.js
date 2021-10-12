@@ -1,24 +1,15 @@
 
-import { Deck } from './Deck.js'
+import { Hand } from './Hand.js'
 
 export class Player {
 
-  constructor(playerNumber) {
+  constructor (playerNumber) {
     this.playerNumber = playerNumber
   }
 
   playerHand (playingCards) {
-    const hand = [this.playerNumber]
-    let sumOfHand = 0
-    let currentCard = 0
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-    const stop = Math.floor(Math.random() * (19 - 14) + 14)
-    while (sumOfHand < stop) {
-      currentCard = playingCards.shift()
-      hand.push(currentCard.toString())
-      sumOfHand += currentCard.valueOf()
-    }
-    hand.push(sumOfHand)
+    const hand = Hand.currentHand(playingCards)
+    hand.unshift(this.playerNumber)
     return hand
     // return `Player #${this.playerNumber}: ${hand.join(' ')} (${sumOfHand})`
   }
