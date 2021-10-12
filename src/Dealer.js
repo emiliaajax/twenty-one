@@ -31,7 +31,9 @@ export class Dealer {
    */
   toString (playingCards) {
     const dealerArray = this.dealerHand(playingCards)
-    const cardsOfDealerHand = dealerArray.slice(0, dealerArray.length - 1)
+    console.log(dealerArray)
+    const cardsOfDealerHand = dealerArray.slice(0, dealerArray.length - 2)
+    console.log(cardsOfDealerHand)
     const sumOfDealerHand = dealerArray.slice(-1)
     return `Dealer   : ${cardsOfDealerHand.join(' ')} (${sumOfDealerHand})\n`
   }

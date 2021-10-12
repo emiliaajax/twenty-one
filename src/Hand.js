@@ -23,8 +23,6 @@ export class Hand {
     const sumOfHand = currentCard.valueOf()
     hand.push(sumOfHand)
     return hand
-  // }
-  // return `Player #${this.playerNumber}: ${hand.join(' ')} (${sumOfHand})`
   }
 
   /**
@@ -39,11 +37,20 @@ export class Hand {
     const cardArray = [first.pop()]
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
     const stop = Math.floor(Math.random() * (19 - 14) + 14)
+    let outcome = ''
     while (sumOfHand < stop) {
       const getNewCard = Array.from(this.firstCard(playingCards))
       sumOfHand += getNewCard.pop()
       cardArray.push(getNewCard.pop())
+      if ((cardArray.length === 5 && sumOfHand < 21) || sumOfHand === 21) {
+        outcome = 'WIN'
+        break
+      } else if (sumOfHand > 21) {
+        outcome = 'LOSE'
+        break
+      }
     }
+    cardArray.push(outcome)
     cardArray.push(sumOfHand)
     return cardArray
   }

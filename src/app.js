@@ -19,13 +19,13 @@ try {
   Deck.shuffle(playingCards)
 
   const numberOfPlayers = Number(process.argv.pop())
+  const dealer = new Dealer()
   for (let i = 1; i <= numberOfPlayers; i++) {
     if (playingCards.length <= 1) {
       playingCards = Deck.create()
       playingCards = Deck.shuffle(playingCards)
     }
     const player = new Player(i)
-    const dealer = new Dealer()
     const firstCard = player.playerFirstCard(playingCards)
     console.log(player.toString(playingCards, firstCard))
     console.log(dealer.toString(playingCards))
