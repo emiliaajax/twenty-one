@@ -28,17 +28,6 @@ try {
     const player = new Player(i)
     console.log(player.playerHand(playingCards))
   }
-
-  // Draw three playing cards, view the remaining playing cards, the drawn playing cards and
-  // then calculate the value of them.
-  // (`value + playingCard` implicitly calls PlayingCard#valueOf to get
-  //  the primitive value of the current PlayingCard object.)
-  // const hand = playingCards.splice(0, 3)
-
-  // // console.log(playingCards.join(', '))
-
-  // const value = hand.reduce((value, playingCard) => value + playingCard, 0)
-  // console.log(`${hand.join(' ')} (${value})`)
 } catch (e) {
   console.error(e.message)
 }
