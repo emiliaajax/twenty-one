@@ -10,15 +10,19 @@
 // TODO: Replace the code below with your own game logic.
 
 import { Deck } from './Deck.js'
+import { Player } from './Player.js'
 
 try {
   // Create 52 playing cards and...
   const playingCards = Deck.create()
-  console.log(playingCards.join(', '), '\n')
+  // console.log(playingCards.join(', '), '\n')
 
   // ...shuffle them.
   Deck.shuffle(playingCards)
-  console.log(playingCards.join(', '), '\n')
+  // console.log(playingCards.join(', '), '\n')
+
+  const player = Player.playerHand(playingCards)
+  console.log(player)
 
   // Draw three playing cards, view the remaining playing cards, the drawn playing cards and
   // then calculate the value of them.
