@@ -27,7 +27,8 @@ try {
       playingCards = Deck.shuffle(playingCards)
     }
     const player = new Player(i)
-    console.log(player.playerHand(playingCards))
+    const firstCard = player.playerFirstCard(playingCards)
+    console.log(player.playerHand(playingCards, firstCard))
     // const stop = Math.floor(Math.random() * (19 - 14) + 14)
     // let sumOfHand = 0
     // let hand = Hand.currentHand(playingCards)
