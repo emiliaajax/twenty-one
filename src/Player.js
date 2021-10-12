@@ -8,7 +8,7 @@ export class Player {
   }
 
   playerHand (playingCards) {
-    const hand = []
+    const hand = [this.playerNumber]
     let sumOfHand = 0
     let currentCard = 0
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -18,6 +18,8 @@ export class Player {
       hand.push(currentCard.toString())
       sumOfHand += currentCard.valueOf()
     }
-    return `Player #${this.playerNumber}: ${hand.join(' ')} (${sumOfHand})`
+    hand.push(sumOfHand)
+    return hand
+    // return `Player #${this.playerNumber}: ${hand.join(' ')} (${sumOfHand})`
   }
 }
