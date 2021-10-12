@@ -1,3 +1,9 @@
+/**
+ * Module for type Dealer.
+ *
+ * @author Emilia Hansson <eh222yn@student.lnu.se>
+ * @version 1.1.0
+ */
 
 import { Hand } from './Hand.js'
 
