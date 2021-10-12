@@ -11,7 +11,7 @@
 
 import { Deck } from './Deck.js'
 import { Player } from './Player.js'
-import { Hand } from './Hand.js'
+// import { Hand } from './Hand.js'
 
 try {
   // Create 52 playing cards and...
@@ -29,13 +29,6 @@ try {
     const player = new Player(i)
     const firstCard = player.playerFirstCard(playingCards)
     console.log(player.playerHand(playingCards, firstCard))
-    // const stop = Math.floor(Math.random() * (19 - 14) + 14)
-    // let sumOfHand = 0
-    // let hand = Hand.currentHand(playingCards)
-    // while (sumOfHand < stop) {
-    //   console.log(player.playerHand(playingCards))
-    //   sumOfHand += hand[hand.length - 1]
-    // }
   }
 } catch (e) {
   console.error(e.message)

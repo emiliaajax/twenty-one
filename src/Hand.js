@@ -12,9 +12,6 @@ export class Hand {
   static onePlayingCard (playingCards) {
     const hand = []
     let currentCard = 0
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-    // const stop = Math.floor(Math.random() * (19 - 14) + 14)
-    // while (sumOfHand < stop) {
     currentCard = playingCards.shift()
     hand.push(currentCard.toString())
     const sumOfHand = currentCard.valueOf()
@@ -34,6 +31,7 @@ export class Hand {
   static handOfCards (playingCards, firstCard) {
     let sumOfHand = firstCard.pop()
     const cardArray = [firstCard.pop()]
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
     const stop = Math.floor(Math.random() * (19 - 14) + 14)
     while (sumOfHand < stop) {
       const getNewCard = Array.from(this.onePlayingCard(playingCards))
