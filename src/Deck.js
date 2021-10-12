@@ -64,16 +64,15 @@ export class Deck {
    * @param {number[]} playingCards Array with the cards in the deck.
    * @returns {number} The drawn card.
    */
-  static drawPile (playingCards) {
-    let drawnCard
-
-    if (playingCards.length > 1) {
-      drawnCard = playingCards.shift()
-    } else {
-      playingCards = this.create()
-      playingCards = this.shuffle()
-      drawnCard = playingCards.shift()
-    }
-    return drawnCard
-  }
+  // static drawPile (playingCards) {
+  //   const drawnCard = playingCards.shift()
+  //   // if (playingCards.length > 1) {
+  //   //   drawnCard = playingCards.shift()
+  //   // } else {
+  //   //   playingCards = this.create()
+  //   //   playingCards = this.shuffle(playingCards)
+  //   //   drawnCard = playingCards.shift()
+  //   // }
+  //   return drawnCard
+  // }
 }

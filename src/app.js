@@ -14,26 +14,31 @@ import { Player } from './Player.js'
 
 try {
   // Create 52 playing cards and...
-  const playingCards = Deck.create()
-  // console.log(playingCards.join(', '), '\n')
+  let playingCards = Deck.create()
 
   // ...shuffle them.
   Deck.shuffle(playingCards)
-  // console.log(playingCards.join(', '), '\n')
 
-  const player = Player.playerHand(playingCards)
-  console.log(player)
+  const numberOfPlayers = Number(process.argv.pop())
+  for (let i = 1; i <= numberOfPlayers; i++) {
+    if (playingCards.length <= 1) {
+      playingCards = Deck.create()
+      playingCards = Deck.shuffle(playingCards)
+    }
+    const player = new Player(i)
+    console.log(player.playerHand(playingCards))
+  }
 
   // Draw three playing cards, view the remaining playing cards, the drawn playing cards and
   // then calculate the value of them.
   // (`value + playingCard` implicitly calls PlayingCard#valueOf to get
   //  the primitive value of the current PlayingCard object.)
-  const hand = playingCards.splice(0, 3)
+  // const hand = playingCards.splice(0, 3)
 
-  console.log(playingCards.join(', '))
+  // // console.log(playingCards.join(', '))
 
-  const value = hand.reduce((value, playingCard) => value + playingCard, 0)
-  console.log(`${hand.join(' ')} (${value})`)
+  // const value = hand.reduce((value, playingCard) => value + playingCard, 0)
+  // console.log(`${hand.join(' ')} (${value})`)
 } catch (e) {
   console.error(e.message)
 }
