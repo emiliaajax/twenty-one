@@ -23,19 +23,9 @@ export class Player {
   }
 
   /**
-   * Returns one card as an array with number of player as first element, suit and rank as second and primite value as third.
-   *
-   * @returns {Array} An array with number of player as first element, suit and rank as second, and primitive value as third.
-   */
-  // playerFirstCard () {
-  //   return this.numberOneCard
-  // }
-
-  /**
    * Returns an array with player number at index 0, suits and ranks from full hand from index 1 until index length-2, and primitive value of whole hand at last index.
    *
    * @param {object[]} playingCards An array with PlayingCard objects.
-   * @param {object} first An object representing the first drawn card by the player.
    * @returns {Array} An array with player number, suits and ranks of all cards and primitive value of full hand.
    */
   playerHand (playingCards) {
@@ -47,17 +37,8 @@ export class Player {
   /**
    * Returns a string representing the player hand.
    *
-   * @param {object[]} playingCards An array with PlayingCard objects.
-   * @param {object} first An object representing the first drawn card by the player.
    * @returns {string} A string representing the player hand.
    */
-  // toString (playingCards) {
-  //   const playerArray = this.playerHand(playingCards)
-  //   const cardsOfPlayerHand = playerArray.slice(1, playerArray.length - 1)
-  //   const sumOfPlayerHand = playerArray.slice(-1)
-  //   return `Player #${this.playerNumber}: ${cardsOfPlayerHand.join(' ')} (${sumOfPlayerHand})`
-  // }
-
   toString () {
     const playerArray = this.fullHand
     const cardsOfPlayerHand = playerArray.slice(1, playerArray.length - 2)

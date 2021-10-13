@@ -11,6 +11,10 @@ import { Hand } from './Hand.js'
  *
  */
 export class Dealer {
+  /**
+   * Creates a Javascript Player instance representing a player.
+   *
+   */
   constructor () {
     this.fullHand = []
   }
@@ -30,7 +34,6 @@ export class Dealer {
   /**
    * Returns a string representing the dealer hand.
    *
-   * @param {object[]} playingCards An array with PlayingCard objects.
    * @returns {string} A string representing the player hand.
    */
   toString () {

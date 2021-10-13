@@ -18,9 +18,8 @@ try {
 
   // ...shuffle them.
   Deck.shuffle(playingCards)
-  console.log(playingCards)
 
-  //Något bättre, men borde ändras!
+  // Något bättre, men borde ändras!
   const numberOfPlayers = Number(process.argv.pop())
   const dealer = new Dealer()
   const players = []
@@ -41,9 +40,9 @@ try {
     const playerResultString = player.toString()
     const playerResult = playerFullHand[playerFullHand.length - 2]
     if (playerResult === 'WIN') {
-      string = `${playerResultString}\nDealer: -\nPlayer wins\n`
+      string = `${playerResultString}\nDealer: -\nPlayer wins!\n`
     } else if (playerResult === 'LOSE') {
-      string = `${playerResultString} BUSTED!\nDealer: -\nDealer wins!\n`
+      string = `${playerResultString} YOU FAT! YOU OUT!\nDealer: -\nDealer wins!\n`
     } else {
       dealer.fullHand = dealer.dealerHand(playingCards)
       const dealerFullHand = dealer.fullHand
@@ -52,7 +51,7 @@ try {
       if (dealerResult === 'WIN') {
         string = `${playerResultString}\n${dealerResultString}\nDealer wins!\n`
       } else if (dealerResult === 'LOSE') {
-        string = `${playerResultString}\n${dealerResultString} BUSTED!\nPlayer wins!\n`
+        string = `${playerResultString}\n${dealerResultString} YOU FAT! YOU OUT!\nPlayer wins!\n`
       } else {
         string = `${playerResultString}\n${dealerResultString}`
         if (playerFullHand.pop() > dealerFullHand.pop()) {
