@@ -18,8 +18,22 @@ export class Player {
    */
   constructor (playerNumber) {
     this.playerNumber = playerNumber
-    this.numberOneCard = {}
+    this.numberOneCard = []
+    this.secondCard = []
     this.fullHand = []
+  }
+
+  /**
+   * Returns the first two cards as an array.
+   *
+   * @returns {Array} array
+   */
+  get firstTwoCards () {
+    const first = this.numberOneCard
+    const second = this.secondCard
+    const sumOfFirstTwo = first[1] + second[1]
+    const firstTwoCardsArray = [first[0], second[0], sumOfFirstTwo]
+    return firstTwoCardsArray
   }
 
   /**
@@ -29,7 +43,7 @@ export class Player {
    * @returns {Array} An array with player number, suits and ranks of all cards and primitive value of full hand.
    */
   playerHand (playingCards) {
-    const fullHand = Hand.restOfCards(playingCards, this.numberOneCard)
+    const fullHand = Hand.dealRestOfCards(playingCards, this.firstTwoCards)
     fullHand.unshift(this.playerNumber)
     return fullHand
   }

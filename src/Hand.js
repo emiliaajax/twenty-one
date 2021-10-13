@@ -15,7 +15,7 @@ export class Hand {
    * @param {object[]} playingCards An array with PlayingCard objects.
    * @returns {Array} An array with suit and rank as first element and primitive value as second.
    */
-  static firstCard (playingCards) {
+  static dealOneCard (playingCards) {
     const hand = []
     let currentCard = 0
     currentCard = playingCards.shift()
@@ -32,15 +32,15 @@ export class Hand {
    * @param {object} first An object representing the first drawn card by player.
    * @returns {Array} An array with all cards drawn represented as strings up to index = length - 2. Last element is sum of the cards primitive values.
    */
-  static restOfCards (playingCards, first) {
+  static dealRestOfCards (playingCards, first) {
     const cardRankArray = [first.pop()]
     let sumOfHand = cardRankArray[0]
-    const cardArray = [first.pop()]
+    const cardArray = first
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
     const stop = Math.floor(Math.random() * (18 - 13) + 13)
     let outcome = ''
-    while (sumOfHand < stop || cardArray.length <= 1) {
-      const getNewCard = Array.from(this.firstCard(playingCards))
+    while (sumOfHand < stop) { // || cardArray.length <= 1) {
+      const getNewCard = Array.from(this.dealOneCard(playingCards))
       const cardRank = getNewCard.pop()
       cardRankArray.push(cardRank)
       cardArray.push(getNewCard.pop())

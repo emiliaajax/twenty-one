@@ -26,8 +26,8 @@ export class Dealer {
    * @returns {Array} An array with suits and ranks of all cards, and primitive value of full hand.
    */
   dealerHand (playingCards) {
-    const firstCard = Hand.firstCard(playingCards)
-    const fullHand = Hand.restOfCards(playingCards, firstCard)
+    const firstCard = Hand.dealOneCard(playingCards)
+    const fullHand = Hand.dealRestOfCards(playingCards, firstCard)
     return fullHand
   }
 
