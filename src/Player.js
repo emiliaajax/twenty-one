@@ -5,7 +5,7 @@
  * @version 1.1.0
  */
 
-import { Hand } from './Hand.js'
+import { Dealer } from './Dealer.js'
 
 /**
  *
@@ -43,7 +43,7 @@ export class Player {
    * @returns {Array} An array with player number, suits and ranks of all cards and primitive value of full hand.
    */
   playerHand (playingCards) {
-    const fullHand = Hand.dealRestOfCards(playingCards, this.firstTwoCards)
+    const fullHand = Dealer.dealRestOfCards(playingCards, this.firstTwoCards)
     fullHand.unshift(this.playerNumber)
     return fullHand
   }
