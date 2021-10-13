@@ -33,15 +33,27 @@ export class Hand {
    * @returns {Array} An array with all cards drawn represented as strings up to index = length - 2. Last element is sum of the cards primitive values.
    */
   static restOfCards (playingCards, first) {
-    let sumOfHand = first.pop()
+    let cardRankArray = [first.pop()]
+    let sumOfHand = cardRankArray[0]
     const cardArray = [first.pop()]
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-    const stop = Math.floor(Math.random() * (17 - 12) + 13)
+    const stop = Math.floor(Math.random() * (17 - 12) + 12)
     let outcome = ''
     while (sumOfHand < stop) {
       const getNewCard = Array.from(this.firstCard(playingCards))
-      sumOfHand += getNewCard.pop()
+      const cardRank = getNewCard.pop()
+      cardRankArray.push(cardRank)
       cardArray.push(getNewCard.pop())
+      sumOfHand = cardRankArray.reduce(function (a, b) { return a + b })
+      const checkForAce = cardRankArray.indexOf(1)
+      if (checkForAce !== -1) {
+        const altCardRankArray = Array.from(cardRankArray)
+        altCardRankArray[checkForAce] = 14
+        const altSumOfHand = altCardRankArray.reduce(function (a, b) { return a + b })
+        if (altSumOfHand > stop && altSumOfHand <= 21 && altSumOfHand > sumOfHand) {
+          sumOfHand = altSumOfHand
+        }
+      }
       if ((cardArray.length === 5 && sumOfHand < 21) || sumOfHand === 21) {
         outcome = 'WIN'
         break
