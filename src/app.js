@@ -20,7 +20,7 @@ try {
   Deck.shuffle(playingCards)
   console.log(playingCards)
 
-  //Fruktansvärd kod, måste ändras!
+  //Något bättre, men borde ändras!
   const numberOfPlayers = Number(process.argv.pop())
   const dealer = new Dealer()
   const players = []
@@ -37,35 +37,25 @@ try {
     player.numberOneCard = players.shift()
     player.fullHand = player.playerHand(playingCards)
     const playerFullHand = player.fullHand
-    console.log(playerFullHand)
     let string = ''
-    const playerResult = player.toString()
-    if (playerFullHand[-2] === 'WIN') {
-      string = `${playerResult}\nDealer: -\nPlayer wins\n`
-    } else if (playerFullHand[-2] === 'LOSE') {
-      string = `${playerResult} BUSTED!\nDealer: -\nDealer wins!\n`
+    const playerResultString = player.toString()
+    const playerResult = playerFullHand[playerFullHand.length - 2]
+    if (playerResult === 'WIN') {
+      string = `${playerResultString}\nDealer: -\nPlayer wins\n`
+    } else if (playerResult === 'LOSE') {
+      string = `${playerResultString} BUSTED!\nDealer: -\nDealer wins!\n`
     } else {
-      
-    }
-    // if (playerResult.search('WIN') !== -1) {
-    //   string = `${playerResult}\nDealer: -\nPlayer wins\n`
-    // } else if (playerResult.search('LOSE') !== -1) {
-    //   string = `${playerResult} BUSTED!\nDealer: -\nDealer wins!\n`
-    // } else {
-      const dealerResult = dealer.toString(playingCards)
-      if (dealerResult.search('WIN') !== -1) {
-        string = `${playerResult}\n${dealerResult}\nDealer wins!\n`
-      } else if (dealerResult.search('LOSE') !== -1) {
-        string = `${playerResult}\n${dealerResult} BUSTED!\nPlayer wins!\n`
+      dealer.fullHand = dealer.dealerHand(playingCards)
+      const dealerFullHand = dealer.fullHand
+      const dealerResultString = dealer.toString()
+      const dealerResult = dealerFullHand[dealerFullHand.length - 2]
+      if (dealerResult === 'WIN') {
+        string = `${playerResultString}\n${dealerResultString}\nDealer wins!\n`
+      } else if (dealerResult === 'LOSE') {
+        string = `${playerResultString}\n${dealerResultString} BUSTED!\nPlayer wins!\n`
       } else {
-        const dealerArray = dealerResult.split(' ')
-        let dealerPoints = dealerArray.splice(-1).pop()
-        dealerPoints = Number(dealerPoints.charAt(1) + dealerPoints.charAt(2))
-        const playerArray = playerResult.split(' ')
-        let playerPoints = playerArray.splice(-1).pop()
-        playerPoints = Number(playerPoints.charAt(1) + playerPoints.charAt(2))
-        string = `${playerResult}\n${dealerResult}`
-        if (playerPoints > dealerPoints) {
+        string = `${playerResultString}\n${dealerResultString}`
+        if (playerFullHand.pop() > dealerFullHand.pop()) {
           string += '\nPlayer wins!\n'
         } else {
           string += '\nDealer wins!\n'

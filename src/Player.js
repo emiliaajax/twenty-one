@@ -60,7 +60,7 @@ export class Player {
 
   toString () {
     const playerArray = this.fullHand
-    const cardsOfPlayerHand = playerArray.slice(1, playerArray.length - 1)
+    const cardsOfPlayerHand = playerArray.slice(1, playerArray.length - 2)
     const sumOfPlayerHand = playerArray.slice(-1)
     return `Player #${this.playerNumber}: ${cardsOfPlayerHand.join(' ')} (${sumOfPlayerHand})`
   }
