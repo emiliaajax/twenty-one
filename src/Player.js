@@ -18,19 +18,18 @@ export class Player {
    */
   constructor (playerNumber) {
     this.playerNumber = playerNumber
+    this.numberOneCard = {}
+    this.fullHand = []
   }
 
   /**
    * Returns one card as an array with number of player as first element, suit and rank as second and primite value as third.
    *
-   * @param {object[]} playingCards An array with PlayingCard objects.
    * @returns {Array} An array with number of player as first element, suit and rank as second, and primitive value as third.
    */
-  playerFirstCard (playingCards) {
-    const first = Hand.firstCard(playingCards)
-    first.unshift(this.playerNumber)
-    return first
-  }
+  // playerFirstCard () {
+  //   return this.numberOneCard
+  // }
 
   /**
    * Returns an array with player number at index 0, suits and ranks from full hand from index 1 until index length-2, and primitive value of whole hand at last index.
@@ -39,8 +38,8 @@ export class Player {
    * @param {object} first An object representing the first drawn card by the player.
    * @returns {Array} An array with player number, suits and ranks of all cards and primitive value of full hand.
    */
-  playerHand (playingCards, first) {
-    const fullHand = Hand.restOfCards(playingCards, first)
+  playerHand (playingCards) {
+    const fullHand = Hand.restOfCards(playingCards, this.numberOneCard)
     fullHand.unshift(this.playerNumber)
     return fullHand
   }
@@ -52,8 +51,15 @@ export class Player {
    * @param {object} first An object representing the first drawn card by the player.
    * @returns {string} A string representing the player hand.
    */
-  toString (playingCards, first) {
-    const playerArray = this.playerHand(playingCards, first)
+  // toString (playingCards) {
+  //   const playerArray = this.playerHand(playingCards)
+  //   const cardsOfPlayerHand = playerArray.slice(1, playerArray.length - 1)
+  //   const sumOfPlayerHand = playerArray.slice(-1)
+  //   return `Player #${this.playerNumber}: ${cardsOfPlayerHand.join(' ')} (${sumOfPlayerHand})`
+  // }
+
+  toString () {
+    const playerArray = this.fullHand
     const cardsOfPlayerHand = playerArray.slice(1, playerArray.length - 1)
     const sumOfPlayerHand = playerArray.slice(-1)
     return `Player #${this.playerNumber}: ${cardsOfPlayerHand.join(' ')} (${sumOfPlayerHand})`
