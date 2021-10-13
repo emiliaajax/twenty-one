@@ -3,7 +3,6 @@
  *
  * @author Johan Leitet <johan.leitet@lnu.se>
  * @author Mats Loock <mats.loock@lnu.se>
- * @author Emilia Hansson <eh222yn@student.lnu.se>
  * @version 1.1.0
  */
 
@@ -57,23 +56,4 @@ export class Deck {
 
     return playingCards
   }
-
-  // /**
-  //  * Returns the drawn card from the drawPile.
-  //  *
-  //  * @param {number[]} playingCards Array with the cards in the deck.
-  //  * @returns {number} The drawn card.
-  //  */
-  // static drawPile (playingCards) {
-  //   let drawnCard
-
-  //   if (playingCards.length > 1) {
-  //     drawnCard = playingCards.shift()
-  //   } else {
-  //     playingCards = this.create()
-  //     playingCards = this.shuffle()
-  //     drawnCard = playingCards.shift()
-  //   }
-  //   return drawnCard
-  // }
 }

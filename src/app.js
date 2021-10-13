@@ -56,9 +56,9 @@ try {
     const playerResultString = player.toString()
     const playerResult = playerFullHand[playerFullHand.length - 2]
     if (playerResult === 'WIN') {
-      string = `${playerResultString}\nDealer: -\nPlayer wins!\n`
+      string = `${playerResultString}\nDealer   : -\nPlayer wins!\n`
     } else if (playerResult === 'LOSE') {
-      string = `${playerResultString} YOU FAT! YOU OUT!\nDealer: -\nDealer wins!\n`
+      string = `${playerResultString} YOU FAT! YOU OUT!\nDealer   : -\nDealer wins!\n`
     } else {
       dealer.fullHand = Dealer.dealerHand(playingCards)
       const dealerFullHand = dealer.fullHand
