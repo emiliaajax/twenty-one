@@ -23,82 +23,50 @@ try {
   // Lägg kortleken i draghögen
   DrawPile.pile = deck
 
-  // Något bättre, men borde ändras!
   const numberOfPlayers = Number(process.argv.pop())
-  // const numberOfPlayers = 3
 
   // Delaern skapas samt en vektor som ska hålla alla spelare
   const players = []
   const dealer = new Dealer()
+  DiscardPile.pile = []
 
+  // Skapa samtliga spelare och ger varsitt kort till dem
+  for (let j = 1; j <= numberOfPlayers; j++) {
+    const player = new Player(j)
+    players.push(player)
+    player.cards.push(player.demandACard())
+  }
   for (let i = 0; i < numberOfPlayers; i++) {
-    // Skapa samtliga spelare och ger varsitt kort till dem
-    for (let i = 1; i <= numberOfPlayers; i++) {
-      const player = new Player(i)
-      players.push(player)
-      player.cards.push(player.demandACard())
-    }
     const player = players[i]
     const playerResult = player.playerHand()
-    const dealerResult = dealer.dealerHand()
-    console.log(player.toString())
-    console.log(dealer.toString())
+    let string = ''
+    if (playerResult === 'WIN') {
+      string = `${player.toString()}\nDealer   : -\nPlayer wins!\n`
+    } else if (playerResult === 'LOSE') {
+      string = `${player.toString()} YOU FAT! YOU OUT!\nDealer   : -\nDealer wins!\n`
+    } else {
+      const dealerResult = dealer.dealerHand()
+      if (dealerResult === 'WIN') {
+        string = `${player.toString()}\n${dealer.toString()}\nDealer wins!\n`
+      } else if (dealerResult === 'LOSE') {
+        string = `${player.toString()}\n${dealer.toString()} YOU FAT! YOU OUT!\nPlayer wins!\n`
+      } else {
+        string = `${player.toString()}\n${dealer.toString()}`
+        if (player.sum > dealer.sum) {
+          string += '\nPlayer wins!\n'
+        } else {
+          string += '\nDealer wins!\n'
+        }
+      }
+    }
+    console.log(string)
+    const allCards = player.cards.concat(dealer.cards)
+    player.cards = []
+    dealer.cards = []
+    for (let i = 0; i < allCards.length; i++) {
+      DiscardPile.pile.push(allCards[i])
+    }
   }
-
-  // // Ger varsitt kort till alla spelare
-  // for (let i = 1; i <= numberOfPlayers; i++) {
-  //   const playerFirstCard = Dealer.dealOneCard()
-  //   players.push(playerFirstCard)
-  // }
-
-  // // Spelet börjar
-  // for (let i = 1; i <= numberOfPlayers; i++) {
-  //   // Om det bara är ett kort kvar i kortleken skapas den om och blandas. Detta måste skrivas om draghög och slänghög istället.
-  //   if (playingCards.length <= 1) {
-  //     playingCards = Deck.create()
-  //     playingCards = Deck.shuffle(playingCards)
-  //   }
-
-  //   // Spelare nummer i skapas
-  //   const player = new Player(i)
-
-  //   // Det första kortet ges till spelaren
-  //   player.firstCard = players.shift()
-
-  //   // Det andra kortet
-  //   player.secondCard = Dealer.dealOneCard(playingCards)
-
-  //   // Resterande kort delas ut till spelaren tills den är nöjd, vinner eller blir tjock
-  //   player.fullHand = player.playerHand(playingCards)
-  //   const playerFullHand = player.fullHand
-
-  //   let string = ''
-  //   const playerResultString = player.toString()
-  //   const playerResult = playerFullHand[playerFullHand.length - 2]
-  //   if (playerResult === 'WIN') {
-  //     string = `${playerResultString}\nDealer   : -\nPlayer wins!\n`
-  //   } else if (playerResult === 'LOSE') {
-  //     string = `${playerResultString} YOU FAT! YOU OUT!\nDealer   : -\nDealer wins!\n`
-  //   } else {
-  //     dealer.fullHand = Dealer.dealerHand(playingCards)
-  //     const dealerFullHand = dealer.fullHand
-  //     const dealerResultString = dealer.toString()
-  //     const dealerResult = dealerFullHand[dealerFullHand.length - 2]
-  //     if (dealerResult === 'WIN') {
-  //       string = `${playerResultString}\n${dealerResultString}\nDealer wins!\n`
-  //     } else if (dealerResult === 'LOSE') {
-  //       string = `${playerResultString}\n${dealerResultString} YOU FAT! YOU OUT!\nPlayer wins!\n`
-  //     } else {
-  //       string = `${playerResultString}\n${dealerResultString}`
-  //       if (playerFullHand.pop() > dealerFullHand.pop()) {
-  //         string += '\nPlayer wins!\n'
-  //       } else {
-  //         string += '\nDealer wins!\n'
-  //       }
-  //     }
-  //   }
-  //   console.log(string)
-  // }
 } catch (e) {
   console.error(e.message)
 }

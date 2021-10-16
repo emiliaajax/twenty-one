@@ -5,12 +5,14 @@
  * @version 1.1.0
  */
 
-import { Deck } from './Deck.js'
-
 /**
  *
  */
 export class DiscardPile {
+  /**
+   * Creates a Javascript DiscardPile instance representing a discard pile.
+   *
+   */
   constructor () {
     this.pile = []
   }

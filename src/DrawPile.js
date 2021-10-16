@@ -12,13 +12,22 @@ import { DiscardPile } from './DiscardPile.js'
  *
  */
 export class DrawPile extends Deck {
+  /**
+   * Creates a Javascript DiscardPile instance representing a discard pile.
+   */
   constructor () {
     super()
     this.pile = []
   }
 
-  discardPileToDrawPile () {
-    const drawPile = DiscardPile.pile
-    this.pile = this.shuffle(drawPile)
+  /**
+   * Shuffles and puts the discard pile in the draw pile. Returns the new draw pile.
+   *
+   * @returns {object[]} The draw pile.
+   */
+  static discardPileToDrawPile () {
+    let drawPile = Array.from(DiscardPile.pile)
+    drawPile = this.shuffle(drawPile)
+    return drawPile
   }
 }

@@ -5,6 +5,7 @@
  * @version 1.1.0
  */
 
+import { DiscardPile } from './DiscardPile.js'
 import { DrawPile } from './DrawPile.js'
 
 /**
@@ -17,6 +18,10 @@ export class Participant {
    * @returns {object} One PlayingCard object from the draw pile.
    */
   demandACard () {
+    if (DrawPile.pile.length <= 1) {
+      DrawPile.pile = DrawPile.discardPileToDrawPile()
+      DiscardPile.pile = []
+    }
     const card = (DrawPile.pile).shift()
     return card
   }
