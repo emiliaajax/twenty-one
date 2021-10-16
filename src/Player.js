@@ -21,58 +21,39 @@ export class Player extends Participant {
     super()
     this.playerNumber = playerNumber
     this.cards = []
+    this.sum = 0
+    this.cardRepresentation = []
   }
 
+  /**
+   * Returns the players result as a string of 'WIN', 'LOSE' or ''. The empty string means that the result is not decided yet.
+   *
+   * @returns {string} Returns the players result.
+   */
   playerHand () {
     const stop = Math.floor(Math.random() * (19 - 13) + 13)
     const cardsOnHand = this.cards
-    // cardsOnHand.push(Dealer.dealOneCard())
-    // const sumOfHand = this.checkSumOfHand(cardsOnHand)
-    while (sumOfHand < stop || cardsOnHand.length < 2) {
-      cardsOnHand.push(Dealer.dealOneCard)
-      const sumOfHand = this.checkSumOfHand(cardsOnHand)
+    let sumOfHand = this.checkSumOfHand(cardsOnHand)
+    while ((sumOfHand < stop && cardsOnHand.length <= 5) || cardsOnHand.length < 2) {
+      cardsOnHand.push(Dealer.dealOneCard())
+      sumOfHand = this.sumWithOptimalAce(cardsOnHand, stop)
     }
+    const result = this.evaluate(cardsOnHand, sumOfHand)
+    const strings = this.cardsAsStrings(cardsOnHand)
+    this.cardRepresentation = strings
+    this.sum = sumOfHand
+    return result
+  }
+
+  /**
+   * Returns a string representing the player hand.
+   *
+   * @returns {string} A string representing the player hand.
+   */
+  toString () {
+    //     const playerArray = this.fullHand
+    //     const cardsOfPlayerHand = playerArray.slice(0, playerArray.length - 2)
+    //     const sumOfPlayerHand = playerArray.slice(-1)
+    return `Player #${this.playerNumber}: ${this.cardRepresentation.join(' ')} (${this.sum})`
   }
 }
-
-//   /**
-//    * Returns the first two cards as an array.
-//    *
-//    * @returns {Array} array
-//    */
-//   get firstTwoCards () {
-//     const first = this.firstCard
-//     const second = this.secondCard
-//     const sumOfFirstTwo = first[1] + second[1]
-//     const firstTwoCardsArray = [first[0], second[0], sumOfFirstTwo]
-//     return firstTwoCardsArray
-//   }
-
-//   /**
-//    * Returns an array with player number at index 0, suits and ranks from full hand from index 1 until index length-2, and primitive value of whole hand at last index.
-//    *
-//    * @param {object[]} playingCards An array with PlayingCard objects.
-//    * @returns {Array} An array with player number, suits and ranks of all cards and primitive value of full hand.
-//    */
-//   playerHand (playingCards) {
-//     const fullHand = Dealer.dealRestOfCards(playingCards, this.firstTwoCards)
-//     const cards = fullHand.pop()
-//     this.fullHand = cards
-//     console.log(cards)
-//     console.log(this.firstCard)
-//     console.log(this.secondCard)
-//     return fullHand
-//   }
-
-//   /**
-//    * Returns a string representing the player hand.
-//    *
-//    * @returns {string} A string representing the player hand.
-//    */
-//   toString () {
-//     const playerArray = this.fullHand
-//     const cardsOfPlayerHand = playerArray.slice(0, playerArray.length - 2)
-//     const sumOfPlayerHand = playerArray.slice(-1)
-//     return `Player #${this.playerNumber}: ${cardsOfPlayerHand.join(' ')} (${sumOfPlayerHand})`
-//   }
-// }

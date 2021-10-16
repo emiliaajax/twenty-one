@@ -40,6 +40,7 @@ try {
   // let playerCards = player.cards
   // playerCards.push(Dealer.dealOneCard())
   player.playerHand()
+  console.log(player.toString())
 
   for (let i = 1; i < players.length; i++) {
     const player = players[i]
