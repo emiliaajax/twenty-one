@@ -4,7 +4,23 @@
  * @author Emilia Hansson <eh222yn@student.lnu.se>
  * @version 1.1.0
  */
+
+import { DrawPile } from './DrawPile.js'
+
+/**
+ *
+ */
 export class Participant {
+  /**
+   * Returns one card from the draw pile.
+   *
+   * @returns {object} One PlayingCard object from the draw pile.
+   */
+  demandACard () {
+    const card = (DrawPile.pile).shift()
+    return card
+  }
+
   /**
    * Returns the sum of all the cards on hand.
    *

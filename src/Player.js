@@ -5,7 +5,6 @@
  * @version 1.1.0
  */
 
-import { Dealer } from './Dealer.js'
 import { Participant } from './Participant.js'
 
 /**
@@ -34,8 +33,8 @@ export class Player extends Participant {
     const stop = Math.floor(Math.random() * (19 - 13) + 13)
     const cardsOnHand = this.cards
     let sumOfHand = this.checkSumOfHand(cardsOnHand)
-    while ((sumOfHand < stop && cardsOnHand.length <= 5) || cardsOnHand.length < 2) {
-      cardsOnHand.push(Dealer.dealOneCard())
+    while ((sumOfHand < stop && cardsOnHand.length < 5) || cardsOnHand.length < 2) {
+      cardsOnHand.push(this.demandACard())
       sumOfHand = this.sumWithOptimalAce(cardsOnHand, stop)
     }
     const result = this.evaluate(cardsOnHand, sumOfHand)

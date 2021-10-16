@@ -25,26 +25,24 @@ try {
 
   // Något bättre, men borde ändras!
   const numberOfPlayers = Number(process.argv.pop())
+  // const numberOfPlayers = 3
 
   // Delaern skapas samt en vektor som ska hålla alla spelare
   const players = []
+  const dealer = new Dealer()
 
-  // Skapa samtliga spelare och ger varsitt kort till dem
-  for (let i = 1; i <= numberOfPlayers; i++) {
-    const player = new Player(i)
-    players.push(player)
-    player.cards.push(Dealer.dealOneCard())
-  }
-
-  let player = players[0]
-  // let playerCards = player.cards
-  // playerCards.push(Dealer.dealOneCard())
-  player.playerHand()
-  console.log(player.toString())
-
-  for (let i = 1; i < players.length; i++) {
+  for (let i = 0; i < numberOfPlayers; i++) {
+    // Skapa samtliga spelare och ger varsitt kort till dem
+    for (let i = 1; i <= numberOfPlayers; i++) {
+      const player = new Player(i)
+      players.push(player)
+      player.cards.push(player.demandACard())
+    }
     const player = players[i]
-    const stop = Math.floor(Math.random() * (19 - 13) + 13)
+    const playerResult = player.playerHand()
+    const dealerResult = dealer.dealerHand()
+    console.log(player.toString())
+    console.log(dealer.toString())
   }
 
   // // Ger varsitt kort till alla spelare
