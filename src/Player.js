@@ -51,9 +51,6 @@ export class Player extends Participant {
    * @returns {string} A string representing the player hand.
    */
   toString () {
-    //     const playerArray = this.fullHand
-    //     const cardsOfPlayerHand = playerArray.slice(0, playerArray.length - 2)
-    //     const sumOfPlayerHand = playerArray.slice(-1)
     return `Player #${this.playerNumber}: ${this.cardRepresentation.join(' ')} (${this.sum})`
   }
 }
