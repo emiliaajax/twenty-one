@@ -77,7 +77,7 @@ export class Participant {
     for (let i = 0; i < cards.length; i++) {
       if (cardsCopy[i].rank === 1) {
         const altSumOfHand = sumOfHand + 13
-        if (altSumOfHand > sumOfHand && altSumOfHand > stop && altSumOfHand <= 21) {
+        if (altSumOfHand > sumOfHand && altSumOfHand >= stop && altSumOfHand <= 21) {
           sumOfHand = altSumOfHand
           cards = cardsCopy
         }
