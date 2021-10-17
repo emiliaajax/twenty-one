@@ -16,8 +16,10 @@ try {
   if ((numberOfPlayers > 7 && numberOfPlayers < 20) || numberOfPlayers > 50 || (Number.isNaN(numberOfPlayers) && process.argv.length > 2)) {
     process.exitCode = 26
     throw new Error('Invalid number of players')
+  } else if (Number.isNaN(numberOfPlayers)) {
+    numberOfPlayers = 3
   }
-  start(numberOfPlayers = 3)
+  start(numberOfPlayers)
 } catch (e) {
   console.error(e.message)
   if (!(e instanceof Error)) {
