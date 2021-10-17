@@ -12,16 +12,31 @@ import { Participant } from './Participant.js'
  */
 export class Player extends Participant {
   /**
+   * The number of the player
+   *
+   * @type {number}
+   */
+  #playerNumber
+  /**
    * Creates a Javascript Player instance representing a player.
    *
    * @param {number} playerNumber The number of the player.
    */
   constructor (playerNumber) {
     super()
-    this.playerNumber = playerNumber
+    this.#playerNumber = playerNumber
     this.cards = []
     this.sum = 0
     this.cardRepresentation = []
+  }
+
+  /**
+   * Gets the number of the player represented by this object.
+   *
+   * @returns {number} The number of the player expressed as a number between 1 and 7, and 20 and 50.
+   */
+  get playerNumber () {
+    return this.#playerNumber
   }
 
   /**
