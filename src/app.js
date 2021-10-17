@@ -22,7 +22,7 @@ try {
   start(numberOfPlayers)
 } catch (e) {
   console.error(e.message)
-  if (!(e instanceof Error)) {
+  if (process.exitCode !== 26 && process.exitCode !== 27) {
     process.exitCode = 1
   }
 }
