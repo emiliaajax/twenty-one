@@ -7,7 +7,7 @@
  * @version 1.1.0
  */
 
-import { start } from './game.js'
+import { start } from './gameloop.js'
 import process from 'process'
 
 try {

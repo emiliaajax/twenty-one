@@ -16,7 +16,7 @@ import { DiscardPile } from './DiscardPile.js'
  *
  * @param {number} numberOfPlayers The number of players.
  */
-export function start (numberOfPlayers = 3) {
+export function start (numberOfPlayers) {
   // Create 52 playing cards and...
   const deck = Deck.create()
 
