@@ -8,10 +8,18 @@
  */
 
 import { start } from './game.js'
+import process from 'process'
 
 try {
   const numberOfPlayers = Number(process.argv.pop())
+  if ((numberOfPlayers > 7 && numberOfPlayers < 20) || numberOfPlayers > 50 || Number.isNaN) {
+    process.exitCode = 26
+    throw new Error('Invalid number of players')
+  }
   start(numberOfPlayers)
 } catch (e) {
   console.error(e.message)
+  if (!(e instanceof Error)) {
+    process.exitCode = 1
+  }
 }
