@@ -19,6 +19,10 @@ export class Participant {
    */
   demandACard () {
     if (DrawPile.pile.length <= 1) {
+      if (DiscardPile.pile.length === 0) {
+        process.exitCode = 27
+        throw new Error('Not enough cards in the draw pile')
+      }
       DrawPile.pile = DrawPile.discardPileToDrawPile()
       DiscardPile.pile = []
     }
