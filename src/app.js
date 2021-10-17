@@ -12,7 +12,7 @@ import process from 'process'
 
 try {
   const numberOfPlayers = Number(process.argv.pop())
-  if ((numberOfPlayers > 7 && numberOfPlayers < 20) || numberOfPlayers > 50 || Number.isNaN) {
+  if ((numberOfPlayers > 7 && numberOfPlayers < 20) || numberOfPlayers > 50 || Number.isNaN(numberOfPlayers)) {
     process.exitCode = 26
     throw new Error('Invalid number of players')
   }
