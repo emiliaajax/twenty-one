@@ -25,16 +25,16 @@ export class Dealer extends Participant {
   }
 
   /**
-   * Gets the final sum of the player hand.
+   * Gets the final sum of dealer hand.
    *
-   * @returns {number} The sum of the final hand of the player.
+   * @returns {number} The sum of the final hand of the dealer.
    */
   get sum () {
     return this.#sum
   }
 
   /**
-   * Gets an array of string representations of every card on players final hand.
+   * Gets an array of string representations of every card on dealers final hand.
    *
    * @returns {string[]} An array with string representations of all cards.
    */
