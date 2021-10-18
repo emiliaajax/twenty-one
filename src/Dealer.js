@@ -11,6 +11,8 @@ import { Participant } from './Participant.js'
  *
  */
 export class Dealer extends Participant {
+  #sum
+  #cardRepresentation
   /**
    * Creates a Javascript Dealer instance representing a dealer.
    *
@@ -18,8 +20,26 @@ export class Dealer extends Participant {
   constructor () {
     super()
     this.cards = []
-    this.sum = 0
-    this.cardRepresentation = []
+    this.#sum = 0
+    this.#cardRepresentation = []
+  }
+
+  /**
+   * Gets the final sum of the player hand.
+   *
+   * @returns {number} The sum of the final hand of the player.
+   */
+  get sum () {
+    return this.#sum
+  }
+
+  /**
+   * Gets an array of string representations of every card on players final hand.
+   *
+   * @returns {string[]} An array with string representations of all cards.
+   */
+  get cardRepresentation () {
+    return this.#cardRepresentation
   }
 
   /**
@@ -37,8 +57,8 @@ export class Dealer extends Participant {
     }
     const result = this.evaluate(cardsOnHand, sumOfHand)
     const strings = this.cardsAsStrings(cardsOnHand)
-    this.cardRepresentation = strings
-    this.sum = sumOfHand
+    this.#cardRepresentation = strings
+    this.#sum = sumOfHand
     return result
   }
 
