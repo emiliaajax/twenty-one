@@ -26,7 +26,7 @@ export class DrawPile extends Deck {
    * @returns {object[]} The draw pile.
    */
   static discardPileToDrawPile () {
-    let drawPile = Array.from(DiscardPile.pile)
+    let drawPile = DiscardPile.pile.concat(DrawPile.pile)
     drawPile = this.shuffle(drawPile)
     return drawPile
   }

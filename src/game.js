@@ -23,15 +23,17 @@ export function start (numberOfPlayers) {
   // ...shuffle them.
   Deck.shuffle(deck)
 
-  // Put deck in the draw pile
+  // Put the deck of cards in the draw pile
   DrawPile.pile = deck
 
-  // Delaern skapas samt en vektor som ska hålla alla spelare
+  // Create the dealer and an array to contain all the players
   const players = []
   const dealer = new Dealer()
+
+  // Create an empty discard pile
   DiscardPile.pile = []
 
-  // Skapa samtliga spelare och ger varsitt kort till dem
+  // Create all the players and give them a card each
   for (let j = 1; j <= numberOfPlayers; j++) {
     const player = new Player(j)
     players.push(player)
@@ -62,11 +64,12 @@ export function start (numberOfPlayers) {
       }
     }
     console.log(string)
-    const allCards = player.cards.concat(dealer.cards)
+    let allCards = player.cards.concat(dealer.cards)
     player.cards = []
     dealer.cards = []
     for (let i = 0; i < allCards.length; i++) {
       DiscardPile.pile.push(allCards[i])
+      allCards = []
     }
   }
 }
