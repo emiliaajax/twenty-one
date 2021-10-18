@@ -69,7 +69,7 @@ export function start (numberOfPlayers) {
     dealer.cards = []
     for (let i = 0; i < allCards.length; i++) {
       DiscardPile.pile.push(allCards[i])
-      allCards = []
     }
+    allCards = []
   }
 }
