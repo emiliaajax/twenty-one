@@ -17,6 +17,8 @@ export class Player extends Participant {
    * @type {number}
    */
   #playerNumber
+  #sum
+  #cardRepresentation
   /**
    * Creates a Javascript Player instance representing a player.
    *
@@ -26,8 +28,8 @@ export class Player extends Participant {
     super()
     this.#playerNumber = playerNumber
     this.cards = []
-    this.sum = 0
-    this.cardRepresentation = []
+    this.#sum = 0
+    this.#cardRepresentation = []
   }
 
   /**
@@ -37,6 +39,24 @@ export class Player extends Participant {
    */
   get playerNumber () {
     return this.#playerNumber
+  }
+
+  /**
+   * Gets the final sum of the player hand.
+   *
+   * @returns {number} The sum of the final hand of the player.
+   */
+  get sum () {
+    return this.#sum
+  }
+
+  /**
+   * Gets an array of string representations of every card on players final hand.
+   *
+   * @returns {string[]} An array with string representations of all cards.
+   */
+  get cardRepresentation () {
+    return this.#cardRepresentation
   }
 
   /**
@@ -54,8 +74,8 @@ export class Player extends Participant {
     }
     const result = this.evaluate(cardsOnHand, sumOfHand)
     const strings = this.cardsAsStrings(cardsOnHand)
-    this.cardRepresentation = strings
-    this.sum = sumOfHand
+    this.#cardRepresentation = strings
+    this.#sum = sumOfHand
     return result
   }
 
