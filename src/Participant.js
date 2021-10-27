@@ -7,6 +7,7 @@
 
 import { DiscardPile } from './DiscardPile.js'
 import { DrawPile } from './DrawPile.js'
+import { DrawPileError } from './DrawPileError.js'
 
 /**
  *
@@ -20,8 +21,7 @@ export class Participant {
   demandACard () {
     if (DrawPile.pile.length <= 1) {
       if (DiscardPile.pile.length === 0) {
-        process.exitCode = 27
-        throw new Error('Not enough cards in the draw pile')
+        throw new DrawPileError('Not enough cards in the draw pile')
       }
       DrawPile.pile = DrawPile.discardPileToDrawPile()
       DiscardPile.pile = []
@@ -38,7 +38,6 @@ export class Participant {
    */
   checkSumOfHand (cards) {
     let sumOfHand = 0
-    // Här skulle jag kanske kunna köra en reduce
     for (let i = 0; i < cards.length; i++) {
       const currentCard = cards[i]
       const currentCardValue = currentCard.valueOf()

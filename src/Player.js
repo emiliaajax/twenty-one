@@ -17,7 +17,6 @@ export class Player extends Participant {
    * @type {number}
    */
   #playerNumber
-  #stop
   #sum
   #cardRepresentation
   /**
@@ -28,7 +27,6 @@ export class Player extends Participant {
   constructor (playerNumber) {
     super()
     this.#playerNumber = playerNumber
-    this.#stop = Math.floor(Math.random() * (19 - 13) + 13)
     this.cards = []
     this.#sum = 0
     this.#cardRepresentation = []
@@ -67,12 +65,12 @@ export class Player extends Participant {
    * @returns {string} Returns the players result.
    */
   playerHand () {
-    // const stop = Math.floor(Math.random() * (19 - 13) + 13)
+    const stop = Math.floor(Math.random() * (19 - 13) + 13)
     const cardsOnHand = this.cards
     let sumOfHand = this.checkSumOfHand(cardsOnHand)
-    while ((sumOfHand < this.#stop && cardsOnHand.length < 5) || cardsOnHand.length < 2) {
+    while ((sumOfHand < stop && cardsOnHand.length < 5) || cardsOnHand.length < 2) {
       cardsOnHand.push(this.demandACard())
-      sumOfHand = this.sumWithOptimalAce(cardsOnHand, this.#stop)
+      sumOfHand = this.sumWithOptimalAce(cardsOnHand, stop)
     }
     const result = this.evaluate(cardsOnHand, sumOfHand)
     const strings = this.cardsAsStrings(cardsOnHand)
