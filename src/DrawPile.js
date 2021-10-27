@@ -15,7 +15,7 @@ export const DrawPile = {
    *
    * @returns {object[]} The draw pile.
    */
-  DiscardPileToDrawPile: function () {
+  discardPileToDrawPile: function () {
     let drawPile = DiscardPile.pile.concat(DrawPile.pile)
     drawPile = Deck.shuffle(drawPile)
     return drawPile
