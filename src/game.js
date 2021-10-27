@@ -47,13 +47,13 @@ export function start (numberOfPlayers) {
     if (playerResult === 'WIN') {
       string = `${player.toString()}\nDealer   : -\nPlayer wins!\n`
     } else if (playerResult === 'LOSE') {
-      string = `${player.toString()} YOU FAT! YOU OUT!\nDealer   : -\nDealer wins!\n`
+      string = `${player.toString()} YOU HUGE!\nDealer   : -\nDealer wins!\n`
     } else {
       const dealerResult = dealer.dealerHand()
       if (dealerResult === 'WIN') {
         string = `${player.toString()}\n${dealer.toString()}\nDealer wins!\n`
       } else if (dealerResult === 'LOSE') {
-        string = `${player.toString()}\n${dealer.toString()} YOU FAT! YOU OUT!\nPlayer wins!\n`
+        string = `${player.toString()}\n${dealer.toString()} YOU HUGE!\nPlayer wins!\n`
       } else {
         string = `${player.toString()}\n${dealer.toString()}`
         if (player.sum > dealer.sum) {
