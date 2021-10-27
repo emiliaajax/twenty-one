@@ -5,6 +5,7 @@
  * @version 1.1.0
  */
 
+import { Deck } from './Deck.js'
 import { Player } from './Player.js'
 import { Dealer } from './Dealer.js'
 import { DrawPile } from './DrawPile.js'
@@ -17,10 +18,9 @@ import { DiscardPile } from './DiscardPile.js'
  */
 export function start (numberOfPlayers) {
   // Create 52 playing card and...
-  DrawPile.pile = DrawPile.create()
-
+  DrawPile.pile = Deck.create()
   // ... shuffle them.
-  DrawPile.shuffle(DrawPile.pile)
+  Deck.shuffle(DrawPile.pile)
 
   // Create dealer and an array to contain all players
   const players = []
