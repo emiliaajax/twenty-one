@@ -43,33 +43,72 @@ export function start (numberOfPlayers) {
   for (let i = 0; i < numberOfPlayers; i++) {
     const player = players[i]
     const playerResult = player.playerHand()
-    let string = ''
-    if (playerResult === 'WIN') {
-      string = `${player.toString()}\nDealer   : -\nPlayer wins!\n`
-    } else if (playerResult === 'LOSE') {
-      string = `${player.toString()} YOU HUGE!\nDealer   : -\nDealer wins!\n`
-    } else {
+    let finalResult = ''
+    if (immediateWin(playerResult)) {
+      finalResult = `${player.toString()}\nDealer   : -\nPlayer wins!\n`
+    }
+    if (isBusted(playerResult)) {
+      finalResult = `${player.toString()} YOU HUGE!\nDealer   : -\nDealer wins!\n`
+    }
+    if (!immediateWin(playerResult) && !isBusted(playerResult)) {
       const dealerResult = dealer.dealerHand()
-      if (dealerResult === 'WIN') {
-        string = `${player.toString()}\n${dealer.toString()}\nDealer wins!\n`
-      } else if (dealerResult === 'LOSE') {
-        string = `${player.toString()}\n${dealer.toString()} YOU HUGE!\nPlayer wins!\n`
-      } else {
-        string = `${player.toString()}\n${dealer.toString()}`
-        if (player.sum > dealer.sum) {
-          string += '\nPlayer wins!\n'
-        } else {
-          string += '\nDealer wins!\n'
-        }
+      if (immediateWin(dealerResult)) {
+        finalResult = `${player.toString()}\n${dealer.toString()}\nDealer wins!\n`
+      }
+      if (isBusted(dealerResult)) {
+        finalResult = `${player.toString()}\n${dealer.toString()} YOU HUGE!\nPlayer wins!\n`
+      }
+      if (!immediateWin(dealerResult) && !isBusted(dealerResult)) {
+        finalResult = letUsCompareHands(player, dealer)
       }
     }
-    console.log(string)
+    console.log(finalResult)
+
     let allCards = player.cards.concat(dealer.cards)
     player.cards = []
     dealer.cards = []
-    for (let i = 0; i < allCards.length; i++) {
-      DiscardPile.pile.push(allCards[i])
+    for (let k = 0; k < allCards.length; k++) {
+      DiscardPile.pile.push(allCards[k])
     }
     allCards = []
   }
+}
+
+// //HELP FUNCTIONS// //
+
+/**
+ * Returns true if the result is a win, false otherwise.
+ *
+ * @param {string} result The result of the hand.
+ * @returns {boolean} True if the result is a win, false otherwise.
+ */
+function immediateWin (result) {
+  return result === 'WIN'
+}
+
+/**
+ * Returns true if the result is lose, false otherwise.
+ *
+ * @param {string} result The result of the hand.
+ * @returns {boolean} True if the result is lose, false otherwise.
+ */
+function isBusted (result) {
+  return result === 'LOSE'
+}
+
+/**
+ * Returns the final result after comparing player and dealer hands.
+ *
+ * @param {object} player The current player object.
+ * @param {object} dealer The dealer object.
+ * @returns {string} A string with the final result.
+ */
+function letUsCompareHands (player, dealer) {
+  let finalResult = ''
+  if (player.sum > dealer.sum) {
+    finalResult = `${player.toString()}\n${dealer.toString()}\nPlayer wins!\n`
+  } else {
+    finalResult = `${player.toString()}\n${dealer.toString()}\nDealer wins!\n`
+  }
+  return finalResult
 }
