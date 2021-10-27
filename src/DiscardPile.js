@@ -8,12 +8,14 @@
 /**
  *
  */
-export class DiscardPile {
-  /**
-   * Creates a Javascript DiscardPile instance representing a discard pile.
-   *
-   */
-  constructor () {
-    this.pile = []
-  }
+// export class DiscardPile {
+//   /**
+//    * Creates a Javascript DiscardPile instance representing a discard pile.
+//    *
+//    */
+//   constructor () {
+//     this.pile = []
+//   }
+export const DiscardPile = {
+  pile: []
 }

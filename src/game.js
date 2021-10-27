@@ -16,13 +16,13 @@ import { DiscardPile } from './DiscardPile.js'
  * @param {number} numberOfPlayers The number of players.
  */
 export function start (numberOfPlayers) {
-  // Create 52 playing cards and...
+  // Create 52 playing card and...
   DrawPile.pile = DrawPile.create()
 
   // ... shuffle them.
   DrawPile.shuffle(DrawPile.pile)
 
-  // Create the dealer and an array to contain all the players
+  // Create dealer and an array to contain all players
   const players = []
   const dealer = new Dealer()
 
@@ -36,6 +36,7 @@ export function start (numberOfPlayers) {
     player.cards.push(player.demandACard())
   }
 
+  // The game loop
   for (let i = 0; i < players.length; i++) {
     let finalResult = ''
     const player = players[i]
@@ -60,6 +61,7 @@ export function start (numberOfPlayers) {
     }
     console.log(finalResult)
 
+    // Throw dealer and player hand of cards to discard pile
     let allCards = player.cards.concat(dealer.cards)
     player.cards = []
     dealer.cards = []
