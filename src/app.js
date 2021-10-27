@@ -15,7 +15,7 @@ import process from 'process'
 try {
   const howManyPlayers = Array.from(process.argv)
   let numberOfPlayers = Number(howManyPlayers.pop())
-  if (numberOfPlayers <= 0 || (numberOfPlayers > 7 && numberOfPlayers !== 20 && numberOfPlayers !== 50) || numberOfPlayers > 50 || (Number.isNaN(numberOfPlayers) && process.argv.length > 2)) {
+  if (numberOfPlayers <= 0 || (numberOfPlayers > 7 && numberOfPlayers !== 20 && numberOfPlayers !== 50) || (Number.isNaN(numberOfPlayers) && process.argv.length > 2)) {
     throw new PlayerError('Invalid number of players')
   } else if (Number.isNaN(numberOfPlayers)) {
     numberOfPlayers = 3

@@ -5,7 +5,6 @@
  * @version 1.1.0
  */
 
-import { Deck } from './Deck.js'
 import { Player } from './Player.js'
 import { Dealer } from './Dealer.js'
 import { DrawPile } from './DrawPile.js'
@@ -18,13 +17,10 @@ import { DiscardPile } from './DiscardPile.js'
  */
 export function start (numberOfPlayers) {
   // Create 52 playing cards and...
-  const deck = Deck.create()
+  DrawPile.pile = DrawPile.create()
 
-  // ...shuffle them.
-  Deck.shuffle(deck)
-
-  // Put the deck of cards in the draw pile
-  DrawPile.pile = deck
+  // ... shuffle them.
+  DrawPile.shuffle(DrawPile.pile)
 
   // Create the dealer and an array to contain all the players
   const players = []
@@ -40,10 +36,10 @@ export function start (numberOfPlayers) {
     player.cards.push(player.demandACard())
   }
 
-  for (let i = 0; i < numberOfPlayers; i++) {
+  for (let i = 0; i < players.length; i++) {
+    let finalResult = ''
     const player = players[i]
     const playerResult = player.playerHand()
-    let finalResult = ''
     if (immediateWin(playerResult)) {
       finalResult = `${player.toString()}\nDealer   : -\nPlayer wins!\n`
     }
