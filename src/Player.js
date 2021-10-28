@@ -64,7 +64,6 @@ export class Player extends Participant {
   /**
    * Returns the players result as a string of 'WIN', 'LOSE' or ''. The empty string means that the result is not decided yet.
    *
-   * @returns {string} Returns the players result.
    */
   playerHand () {
     const stop = Math.floor(Math.random() * (19 - 13) + 13)

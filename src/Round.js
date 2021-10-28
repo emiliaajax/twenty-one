@@ -13,15 +13,15 @@ export class Round {
    */
   static play (player, dealer) {
     player.playerHand()
-    let finalResult = player.checkForImmediateWinOrLoss()
-    if (!finalResult) {
+    let gameResult = player.checkForImmediateWinOrLoss()
+    if (!gameResult) {
       dealer.dealerHand()
-      finalResult = dealer.checkForImmediateWinOrLoss(player)
-      if (!finalResult) {
-        finalResult = this.#compareHands(player, dealer)
+      gameResult = dealer.checkForImmediateWinOrLoss(player)
+      if (!gameResult) {
+        gameResult = this.#compareHands(player, dealer)
       }
     }
-    return finalResult
+    return gameResult
   }
 
   /**
@@ -32,12 +32,12 @@ export class Round {
    * @returns {string} A string with the final result.
    */
   static #compareHands (player, dealer) {
-    let finalResult = ''
+    let gameResult = ''
     if (player.sum > dealer.sum) {
-      finalResult = `${player.toString()}\n${dealer.toString()}\nPlayer wins!\n`
+      gameResult = `${player.toString()}\n${dealer.toString()}\nPlayer wins!\n`
     } else {
-      finalResult = `${player.toString()}\n${dealer.toString()}\nDealer wins!\n`
+      gameResult = `${player.toString()}\n${dealer.toString()}\nDealer wins!\n`
     }
-    return finalResult
+    return gameResult
   }
 }
