@@ -12,9 +12,7 @@ import { DrawPile } from './DrawPile.js'
 import { DiscardPile } from './DiscardPile.js'
 
 /**
- * Starts the game and prints the result in the console.
  *
- * @param {number} numberOfPlayers The number of players.
  */
 export class Game {
   /**
@@ -83,22 +81,7 @@ export class Game {
         }
       }
       console.log(finalResult)
-      this.#throwCardsOnDiscardPile(player, dealer)
-    }
-  }
-
-  /**
-   * Throws player and dealer cards on discard pile after a round.
-   *
-   * @param {object} player The player object.
-   * @param {object} dealer The dealer object.
-   */
-  #throwCardsOnDiscardPile (player, dealer) {
-    const allCards = player.cards.concat(dealer.cards)
-    player.cards = []
-    dealer.cards = []
-    for (let k = 0; k < allCards.length; k++) {
-      DiscardPile.pile.push(allCards[k])
+      DiscardPile.throwCards(player, dealer)
     }
   }
 
