@@ -5,10 +5,8 @@
  * @version 1.1.0
  */
 
-import { Deck } from './Deck.js'
 import { Player } from './Player.js'
 import { Dealer } from './Dealer.js'
-import { DrawPile } from './DrawPile.js'
 import { DiscardPile } from './DiscardPile.js'
 import { Round } from './Round.js'
 
@@ -30,8 +28,6 @@ export class Game {
    *
    */
   start () {
-    DrawPile.pile = Deck.create()
-    Deck.shuffle(DrawPile.pile)
     const dealer = new Dealer()
     const players = this.#createPlayersAndHandThemACard()
     this.#playGameAndPrintResult(players, dealer)

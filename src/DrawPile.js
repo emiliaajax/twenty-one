@@ -10,7 +10,7 @@ import { DiscardPile } from './DiscardPile.js'
 import { DrawPileError } from './DrawPileError.js'
 
 export const DrawPile = {
-  pile: [],
+  pile: Deck.shuffle(Deck.create()),
   /**
    * Check if drawPile has more than one card, if not put the discard pile and draw pile together and shuffle. If the discard pile is empty, throw error.
    *
