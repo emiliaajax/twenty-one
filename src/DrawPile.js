@@ -6,7 +6,7 @@
  */
 
 import { Deck } from './Deck.js'
-import { DiscardPile } from './DiscardPile.js'
+import { discardPile } from './DiscardPile.js'
 import { DrawPileError } from './DrawPileError.js'
 
 export const drawPile = {
@@ -18,11 +18,11 @@ export const drawPile = {
    */
   checkPile () {
     if (this.pile.length <= 1) {
-      if (DiscardPile.pile.length === 0) {
+      if (discardPile.pile.length === 0) {
         throw new DrawPileError('Not enough cards in the draw pile')
       }
       this.pile = this.discardPileToDrawPile()
-      DiscardPile.pile = []
+      discardPile.pile = []
     }
   },
   /**
@@ -31,7 +31,7 @@ export const drawPile = {
    * @returns {object[]} The draw pile.
    */
   discardPileToDrawPile () {
-    let updatedDrawPile = DiscardPile.pile.concat(drawPile.pile)
+    let updatedDrawPile = discardPile.pile.concat(drawPile.pile)
     updatedDrawPile = Deck.shuffle(updatedDrawPile)
     return updatedDrawPile
   }

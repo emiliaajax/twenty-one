@@ -7,7 +7,7 @@
 
 import { Player } from './Player.js'
 import { Dealer } from './Dealer.js'
-import { DiscardPile } from './DiscardPile.js'
+import { discardPile } from './DiscardPile.js'
 import { Round } from './Round.js'
 
 /**
@@ -59,7 +59,7 @@ export class Game {
       const player = playersArray[i]
       const gameResult = Round.play(player, dealer)
       console.log(gameResult)
-      DiscardPile.throwCards(player, dealer)
+      discardPile.throwCards(player, dealer)
     }
   }
 }

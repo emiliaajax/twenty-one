@@ -16,7 +16,7 @@
 //   constructor () {
 //     this.pile = []
 //   }
-export const DiscardPile = {
+export const discardPile = {
   pile: [],
   /**
    * Throws player and dealer cards on discard pile after a round.
