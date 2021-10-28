@@ -5,7 +5,7 @@
  * @version 1.1.0
  */
 
-import { DrawPile } from './DrawPile.js'
+import { drawPile } from './drawPile.js'
 
 /**
  *
@@ -17,8 +17,8 @@ export class Participant {
    * @returns {object} One PlayingCard object from the draw pile.
    */
   demandACard () {
-    DrawPile.checkPile()
-    const card = (DrawPile.pile).shift()
+    drawPile.checkPile()
+    const card = (drawPile.pile).shift()
     return card
   }
 

@@ -7,7 +7,7 @@
  * @version 1.1.0
  */
 
-import { Game } from './Game.js'
+import { Game } from './GameLoop.js'
 import { PlayerError } from './PlayerError.js'
 import { DrawPileError } from './DrawPileError.js'
 import process from 'process'
