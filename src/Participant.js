@@ -18,8 +18,7 @@ export class Participant {
    */
   demandACard () {
     drawPile.checkPile()
-    const card = (drawPile.pile).shift()
-    return card
+    return (drawPile.pile).shift()
   }
 
   /**
