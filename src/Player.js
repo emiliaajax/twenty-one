@@ -19,6 +19,7 @@ export class Player extends Participant {
   #playerNumber
   #sum
   #cardRepresentation
+  #result
   /**
    * Creates a Javascript Player instance representing a player.
    *
@@ -30,6 +31,7 @@ export class Player extends Participant {
     this.cards = []
     this.#sum = 0
     this.#cardRepresentation = []
+    this.#result = ''
   }
 
   /**
@@ -72,11 +74,25 @@ export class Player extends Participant {
       cardsOnHand.push(this.demandACard())
       sumOfHand = this.sumWithOptimalAce(cardsOnHand, stop)
     }
-    const result = this.evaluate(cardsOnHand, sumOfHand)
-    const strings = this.cardsAsStrings(cardsOnHand)
-    this.#cardRepresentation = strings
+    this.#result = this.evaluate(cardsOnHand, sumOfHand)
+    this.#cardRepresentation = this.cardsAsStrings(cardsOnHand)
     this.#sum = sumOfHand
-    return result
+  }
+
+  /**
+   * Returns a final game result as a string if the outcome is decided already, otherwise returns undefined.
+   *
+   * @returns {string|undefined} Returns game result as a string if outcome is decided, otherwise undefined
+   */
+  checkForImmediateWinOrLoss () {
+    let gameResult
+    if (this.#result === 'WIN') {
+      gameResult = `${this.toString()}\nDealer   : -\nPlayer wins!\n`
+    }
+    if (this.#result === 'LOSE') {
+      gameResult = `${this.toString()} YOU HUGE!\nDealer   : -\nDealer wins!\n`
+    }
+    return gameResult
   }
 
   /**

@@ -57,7 +57,7 @@ export class Game {
   #playGameAndPrintResult (playersArray, dealer) {
     for (let i = 0; i < playersArray.length; i++) {
       const player = playersArray[i]
-      const gameResult = Round.playRound(player, dealer)
+      const gameResult = Round.play(player, dealer)
       console.log(gameResult)
       DiscardPile.throwCards(player, dealer)
     }
