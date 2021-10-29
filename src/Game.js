@@ -22,13 +22,13 @@ export class Game {
    */
   #numberOfPlayers
   /**
-   * An instance of type Dealer
+   * An instance of type Dealer.
    *
    * @type {object}
    */
   #dealer
   /**
-   * An instance of type PlayingCards
+   * An instance of type PlayingCards.
    *
    * @type {object}
    */

@@ -8,13 +8,14 @@
 import { Participant } from './Participant.js'
 
 /**
- * Represents a player
+ * Represents a player.
  *
  * @class
+ * @augments {Participant}
  */
 export class Player extends Participant {
   /**
-   * The number of the player
+   * The number of the player.
    *
    * @type {number}
    */
@@ -56,7 +57,7 @@ export class Player extends Participant {
   /**
    * Returns the player hand as a string if player won or lost immediately, otherwise returns undefined.
    *
-   * @param {object[]} playingCards A playingCard object.
+   * @param {object} playingCards A playingCard object.
    * @returns {string|undefined} The player hand as a string if dealer won or lost immediately, otherwise undefined.
    */
   playerHand (playingCards) {

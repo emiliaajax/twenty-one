@@ -49,7 +49,7 @@ export class Dealer extends Participant {
   /**
    * Returns the dealer hand as a string if dealer won or lost immediately, otherwise returns undefined.
    *
-   * @param {object[]} playingCards A pile object.
+   * @param {object} playingCards A playingCards object.
    * @returns {string|undefined} The dealer hand as a string if dealer won or lost immediately, otherwise undefined.
    */
   dealerHand (playingCards) {
