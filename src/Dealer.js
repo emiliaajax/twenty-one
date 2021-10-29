@@ -14,7 +14,17 @@ import { Participant } from './Participant.js'
  * @augments {Participant}
  */
 export class Dealer extends Participant {
+  /**
+   * The total sum of dealer hand.
+   *
+   * @type {number}
+   */
   #sum
+  /**
+   * The cards represented as an array of strings.
+   *
+   * @type {string[]}
+   */
   #cardRepresentation
   /**
    * Creates a Javascript Dealer instance representing a dealer.
@@ -37,10 +47,10 @@ export class Dealer extends Participant {
   }
 
   /**
-   * Returns the dealer hand result as a string if dealer won or lost immediately, otherwise returns undefined.
+   * Returns the dealer hand as a string if dealer won or lost immediately, otherwise returns undefined.
    *
    * @param {object[]} pile A pile object.
-   * @returns {string|undefined} Returns dealer hand result as a string if dealer won or lost immediately, otherwise undefined.
+   * @returns {string|undefined} The dealer hand as a string if dealer won or lost immediately, otherwise undefined.
    */
   dealerHand (pile) {
     let gameResult

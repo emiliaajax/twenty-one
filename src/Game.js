@@ -33,12 +33,13 @@ export class Game {
    *
    */
   start () {
-    console.log(this.pile)
     this.#createPlayersAndHandThemACard()
-    console.log(this.pile)
-    console.log(this.pile.drawPile)
-    this.#playGameAndPrintResult()
-    console.log(this.pile)
+    for (let i = 0; i < this.players.length; i++) {
+      const player = this.players[i]
+      const gameResult = Round.play(player, this.dealer, this.pile)
+      console.log(gameResult)
+      this.pile.throwCardsToDiscardPile(player, this.dealer)
+    }
   }
 
   /**
@@ -50,19 +51,6 @@ export class Game {
       const player = new Player(j)
       this.players.push(player)
       player.cards.push(this.pile.drawACard())
-    }
-  }
-
-  /**
-   * Dealer plays towards the players one at a time, and prints the result in the console.
-   *
-   */
-  #playGameAndPrintResult () {
-    for (let i = 0; i < this.players.length; i++) {
-      const player = this.players[i]
-      const gameResult = Round.play(player, this.dealer, this.pile)
-      console.log(gameResult)
-      this.pile.throwCardsToDiscardPile(player, this.dealer)
     }
   }
 }

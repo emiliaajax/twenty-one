@@ -8,7 +8,9 @@
 import { Participant } from './Participant.js'
 
 /**
+ * Represents a player
  *
+ * @class
  */
 export class Player extends Participant {
   /**
@@ -17,7 +19,17 @@ export class Player extends Participant {
    * @type {number}
    */
   #playerNumber
+  /**
+   * The total sum of player hand.
+   *
+   * @type {number}
+   */
   #sum
+  /**
+   * The cards represented as an array of strings.
+   *
+   * @type {string[]}
+   */
   #cardRepresentation
   /**
    * Creates a Javascript Player instance representing a player.
@@ -42,10 +54,10 @@ export class Player extends Participant {
   }
 
   /**
-   * Returns the result of the player hand as a string if player won or lost immediately, otherwise undefined.
+   * Returns the player hand as a string if player won or lost immediately, otherwise returns undefined.
    *
    * @param {object[]} pile A pile object.
-   * @returns {string|undefined} Returns dealer result of hand as a string if dealer won or lost immediately, otherwise undefined.
+   * @returns {string|undefined} The player hand as a string if dealer won or lost immediately, otherwise undefined.
    */
   playerHand (pile) {
     let gameResult

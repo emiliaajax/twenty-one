@@ -1,12 +1,14 @@
 /**
- * Module for type Player.
+ * Module for type Participant
  *
  * @author Emilia Hansson <eh222yn@student.lnu.se>
  * @version 1.1.0
  */
 
 /**
+ * Represents a participant
  *
+ * @class
  */
 export class Participant {
   /**

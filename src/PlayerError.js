@@ -1,7 +1,14 @@
+/**
+ * Module for type PlayerError.
+ *
+ * @author Emilia Hansson <eh222yn@student.lnu.se>
+ * @version 1.1.0
+ */
 
 /**
+ * Represents a player error.
  *
- *
+ * @class
  */
 // The following code is written using the code example from the lecture about error handling and validation (course week 7) as template.
 export class PlayerError extends Error {
