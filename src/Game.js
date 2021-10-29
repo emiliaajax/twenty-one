@@ -47,12 +47,15 @@ export class Game {
    * An instance of type Player.
    *
    * @type {Player}
+   * @private
    */
   #currentPlayer
+
   /**
    * Creates a Javascript Game instance representing a game.
    *
    * @param {number} numberOfPlayers The number of players.
+   * @private
    */
   constructor (numberOfPlayers) {
     this.#numberOfPlayers = numberOfPlayers
