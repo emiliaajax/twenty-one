@@ -16,13 +16,13 @@ export class Round {
    *
    * @param {object} player The current player object.
    * @param {object} dealer The dealer object.
-   * @param {object[]} pile A pile object.
+   * @param {object[]} playingCards The playingCards object.
    * @returns {string} The final result of the game round between player and dealer.
    */
-  static play (player, dealer, pile) {
-    let finalResult = player.playerHand(pile)
+  static play (player, dealer, playingCards) {
+    let finalResult = player.playerHand(playingCards)
     if (!finalResult) {
-      finalResult = dealer.dealerHand(pile)
+      finalResult = dealer.dealerHand(playingCards)
       if (!finalResult) {
         finalResult = this.#compareHands(player, dealer)
       } else {

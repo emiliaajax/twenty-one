@@ -7,7 +7,7 @@
 
 import { Player } from './Player.js'
 import { Dealer } from './Dealer.js'
-import { Pile } from './Pile.js'
+import { PlayingCards } from './Pile.js'
 import { Round } from './Round.js'
 
 /**
@@ -24,7 +24,7 @@ export class Game {
   constructor (numberOfPlayers) {
     this.numberOfPlayers = numberOfPlayers
     this.dealer = new Dealer()
-    this.pile = new Pile()
+    this.playingCards = new PlayingCards()
     this.players = []
   }
 
@@ -36,9 +36,9 @@ export class Game {
     this.#createPlayersAndHandThemACard()
     for (let i = 0; i < this.players.length; i++) {
       const player = this.players[i]
-      const gameResult = Round.play(player, this.dealer, this.pile)
+      const gameResult = Round.play(player, this.dealer, this.playingCards)
       console.log(gameResult)
-      this.pile.throwCardsToDiscardPile(player, this.dealer)
+      this.playingCards.throwCardsToDiscardPile(player, this.dealer)
     }
   }
 
@@ -50,7 +50,7 @@ export class Game {
     for (let j = 1; j <= this.numberOfPlayers; j++) {
       const player = new Player(j)
       this.players.push(player)
-      player.cards.push(this.pile.drawACard())
+      player.cards.push(this.playingCards.drawACard())
     }
   }
 }

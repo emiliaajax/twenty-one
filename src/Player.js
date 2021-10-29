@@ -56,16 +56,16 @@ export class Player extends Participant {
   /**
    * Returns the player hand as a string if player won or lost immediately, otherwise returns undefined.
    *
-   * @param {object[]} pile A pile object.
+   * @param {object[]} playingCards A playingCard object.
    * @returns {string|undefined} The player hand as a string if dealer won or lost immediately, otherwise undefined.
    */
-  playerHand (pile) {
+  playerHand (playingCards) {
     let gameResult
     const stop = Math.floor(Math.random() * (19 - 13) + 13)
     const cardsOnHand = this.cards
     let sumOfHand = this.checkSumOfHand(cardsOnHand)
     while ((sumOfHand < stop && cardsOnHand.length < 5) || cardsOnHand.length < 2) {
-      cardsOnHand.push(pile.drawACard())
+      cardsOnHand.push(playingCards.drawACard())
       sumOfHand = this.sumWithOptimalAce(cardsOnHand, stop)
     }
     this.#cardRepresentation = this.cardsAsStrings(cardsOnHand)

@@ -49,16 +49,16 @@ export class Dealer extends Participant {
   /**
    * Returns the dealer hand as a string if dealer won or lost immediately, otherwise returns undefined.
    *
-   * @param {object[]} pile A pile object.
+   * @param {object[]} playingCards A pile object.
    * @returns {string|undefined} The dealer hand as a string if dealer won or lost immediately, otherwise undefined.
    */
-  dealerHand (pile) {
+  dealerHand (playingCards) {
     let gameResult
     const stop = Math.floor(Math.random() * (19 - 13) + 13)
     const cardsOnHand = this.cards
     let sumOfHand = this.checkSumOfHand(cardsOnHand)
     while (sumOfHand < stop && cardsOnHand.length < 5) {
-      cardsOnHand.push(pile.drawACard())
+      cardsOnHand.push(playingCards.drawACard())
       sumOfHand = this.sumWithOptimalAce(cardsOnHand, stop)
     }
     this.#cardRepresentation = this.cardsAsStrings(cardsOnHand)

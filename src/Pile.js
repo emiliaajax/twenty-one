@@ -14,7 +14,7 @@ import { DrawPileError } from './DrawPileError.js'
  * @class
  * @augments {Deck}
  */
-export class Pile {
+export class PlayingCards {
   /**
    * Creates a Javascript Pile instance representing a pile.
    *
