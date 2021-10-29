@@ -16,15 +16,39 @@ import { PlayingCards } from './PlayingCards.js'
  */
 export class Game {
   /**
+   * The number of players.
+   *
+   * @type {number}
+   */
+  #numberOfPlayers
+  /**
+   * An instance of type Dealer
+   *
+   * @type {object}
+   */
+  #dealer
+  /**
+   * An instance of type PlayingCards
+   *
+   * @type {object}
+   */
+  #playingCards
+  /**
+   * An empty array to hold all players.
+   *
+   * @type {Array}
+   */
+  #players
+  /**
    * Creates a Javascript Game instance representing a game.
    *
    * @param {number} numberOfPlayers The number of players.
    */
   constructor (numberOfPlayers) {
-    this.numberOfPlayers = numberOfPlayers
-    this.dealer = new Dealer()
-    this.playingCards = new PlayingCards()
-    this.players = []
+    this.#numberOfPlayers = numberOfPlayers
+    this.#dealer = new Dealer()
+    this.#playingCards = new PlayingCards()
+    this.#players = []
   }
 
   /**
@@ -33,11 +57,11 @@ export class Game {
    */
   start () {
     this.#createPlayersAndHandThemACard()
-    for (let i = 0; i < this.players.length; i++) {
-      this.currentPlayer = this.players[i]
+    for (let i = 0; i < this.#players.length; i++) {
+      this.currentPlayer = this.#players[i]
       const gameResult = this.#playRound()
       console.log(gameResult)
-      this.playingCards.throwCardsToDiscardPile(this.currentPlayer, this.dealer)
+      this.#playingCards.throwCardsToDiscardPile(this.currentPlayer, this.#dealer)
     }
   }
 
@@ -46,10 +70,10 @@ export class Game {
    *
    */
   #createPlayersAndHandThemACard () {
-    for (let j = 1; j <= this.numberOfPlayers; j++) {
+    for (let j = 1; j <= this.#numberOfPlayers; j++) {
       this.currentPlayer = new Player(j)
-      this.players.push(this.currentPlayer)
-      this.currentPlayer.cards.push(this.playingCards.drawACard())
+      this.#players.push(this.currentPlayer)
+      this.currentPlayer.cards.push(this.#playingCards.drawACard())
     }
   }
 
@@ -59,9 +83,9 @@ export class Game {
    * @returns {string} The final result of the game round between player and dealer.
    */
   #playRound () {
-    let finalResult = this.currentPlayer.playerHand(this.playingCards)
+    let finalResult = this.currentPlayer.playerHand(this.#playingCards)
     if (!finalResult) {
-      finalResult = this.dealer.dealerHand(this.playingCards)
+      finalResult = this.#dealer.dealerHand(this.#playingCards)
       if (!finalResult) {
         finalResult = this.#compareHands(this.currentPlayer)
       } else {
@@ -78,10 +102,10 @@ export class Game {
    */
   #compareHands () {
     let gameResult = ''
-    if (this.currentPlayer.sum > this.dealer.sum) {
-      gameResult = `${this.currentPlayer.toString()}\n${this.dealer.toString()}\nPlayer wins!\n`
+    if (this.currentPlayer.sum > this.#dealer.sum) {
+      gameResult = `${this.currentPlayer.toString()}\n${this.#dealer.toString()}\nPlayer wins!\n`
     } else {
-      gameResult = `${this.currentPlayer.toString()}\n${this.dealer.toString()}\nDealer wins!\n`
+      gameResult = `${this.currentPlayer.toString()}\n${this.#dealer.toString()}\nDealer wins!\n`
     }
     return gameResult
   }
