@@ -8,7 +8,6 @@
 import { Player } from './Player.js'
 import { Dealer } from './Dealer.js'
 import { PlayingCards } from './PlayingCards.js'
-import { Round } from './Round.js'
 
 /**
  * Represents a game.
@@ -35,10 +34,10 @@ export class Game {
   start () {
     this.#createPlayersAndHandThemACard()
     for (let i = 0; i < this.players.length; i++) {
-      const player = this.players[i]
-      const gameResult = Round.play(player, this.dealer, this.playingCards)
+      this.currentPlayer = this.players[i]
+      const gameResult = this.#playRound()
       console.log(gameResult)
-      this.playingCards.throwCardsToDiscardPile(player, this.dealer)
+      this.playingCards.throwCardsToDiscardPile(this.currentPlayer, this.dealer)
     }
   }
 
@@ -48,9 +47,42 @@ export class Game {
    */
   #createPlayersAndHandThemACard () {
     for (let j = 1; j <= this.numberOfPlayers; j++) {
-      const player = new Player(j)
-      this.players.push(player)
-      player.cards.push(this.playingCards.drawACard())
+      this.currentPlayer = new Player(j)
+      this.players.push(this.currentPlayer)
+      this.currentPlayer.cards.push(this.playingCards.drawACard())
     }
+  }
+
+  /**
+   * Returns the final result of the game round between a player and a dealer.
+   *
+   * @returns {string} The final result of the game round between player and dealer.
+   */
+  #playRound () {
+    let finalResult = this.currentPlayer.playerHand(this.playingCards)
+    if (!finalResult) {
+      finalResult = this.dealer.dealerHand(this.playingCards)
+      if (!finalResult) {
+        finalResult = this.#compareHands(this.currentPlayer)
+      } else {
+        finalResult = this.currentPlayer.toString() + finalResult
+      }
+    }
+    return finalResult
+  }
+
+  /**
+   * Returns the game result after comparing player and dealer hands.
+   *
+   * @returns {string} A string with the final result.
+   */
+  #compareHands () {
+    let gameResult = ''
+    if (this.currentPlayer.sum > this.dealer.sum) {
+      gameResult = `${this.currentPlayer.toString()}\n${this.dealer.toString()}\nPlayer wins!\n`
+    } else {
+      gameResult = `${this.currentPlayer.toString()}\n${this.dealer.toString()}\nDealer wins!\n`
+    }
+    return gameResult
   }
 }
