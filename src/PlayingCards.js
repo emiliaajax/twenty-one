@@ -1,5 +1,5 @@
 /**
- * Module for type Pile.
+ * Module for type PlayingCards.
  *
  * @author Emilia Hansson <eh222yn@student.lnu.se>
  * @version 1.1.0
@@ -9,14 +9,13 @@ import { Deck } from './Deck.js'
 import { DrawPileError } from './DrawPileError.js'
 
 /**
- * Represents a pile.
+ * Represents playing cards.
  *
  * @class
- * @augments {Deck}
  */
 export class PlayingCards {
   /**
-   * Creates a Javascript Pile instance representing a pile.
+   * Creates a Javascript Pile instance representing playing cards.
    *
    */
   constructor () {
@@ -25,11 +24,12 @@ export class PlayingCards {
   }
 
   /**
-   * Checks if drawPile has more than one card, if not the discard pile and draw pile is put together and shuffled. If the discard pile is empty, error throws.
+   * Returns one card from the draw pile. If the draw pile has only one card left and the discard pile is empty, error is thrown.
    *
    * @throws {DrawPileError} Not enough cards in the draw pile.
+   * @returns {object} One PlayingCard object from the draw pile.
    */
-  checkDrawPile () {
+  drawACard () {
     if (this.drawPile.length <= 1) {
       if (this.discardPile.length === 0) {
         throw new DrawPileError('Not enough cards in the draw pile')
@@ -37,15 +37,6 @@ export class PlayingCards {
       this.drawPile = this.discardPileToDrawPile()
       this.discardPile = []
     }
-  }
-
-  /**
-   * Returns one card from the draw pile.
-   *
-   * @returns {object} One PlayingCard object from the draw pile.
-   */
-  drawACard () {
-    this.checkDrawPile()
     return this.drawPile.shift()
   }
 
@@ -61,7 +52,7 @@ export class PlayingCards {
   }
 
   /**
-   * Throws player and dealer cards on discard pile after a round.
+   * Throws player and dealer cards on discard pile after a game round.
    *
    * @param {object} player The player object.
    * @param {object} dealer The dealer object.
