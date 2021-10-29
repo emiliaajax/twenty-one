@@ -7,7 +7,7 @@
 
 import { Player } from './Player.js'
 import { Dealer } from './Dealer.js'
-import { PlayingCards } from './Pile.js'
+import { PlayingCards } from './PlayingCards.js'
 import { Round } from './Round.js'
 
 /**
