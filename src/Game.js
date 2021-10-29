@@ -1,5 +1,5 @@
 /**
- * Module for game loop.
+ * Module for the type Game.
  *
  * @author Emilia Hansson <eh222yn@student.lnu.se>
  * @version 1.1.0
@@ -7,11 +7,13 @@
 
 import { Player } from './Player.js'
 import { Dealer } from './Dealer.js'
-import { discardPile } from './DiscardPile.js'
+import { Pile } from './Pile.js'
 import { Round } from './Round.js'
 
 /**
+ * Represents a game.
  *
+ * @class
  */
 export class Game {
   /**
@@ -21,45 +23,46 @@ export class Game {
    */
   constructor (numberOfPlayers) {
     this.numberOfPlayers = numberOfPlayers
+    this.dealer = new Dealer()
+    this.pile = new Pile()
+    this.players = []
   }
 
   /**
-   * Starts game and prints result in console.
+   * Starts game and prints final game result in console.
    *
    */
   start () {
-    const dealer = new Dealer()
-    const players = this.#createPlayersAndHandThemACard()
-    this.#playGameAndPrintResult(players, dealer)
+    console.log(this.pile)
+    this.#createPlayersAndHandThemACard()
+    console.log(this.pile)
+    console.log(this.pile.drawPile)
+    this.#playGameAndPrintResult()
+    console.log(this.pile)
   }
 
   /**
-   * Returns an array with all players and all of them has been given one card each.
+   * Returns an array with all players where all has been given one card each.
    *
-   * @returns {object[]} Returns an array with all players.
    */
   #createPlayersAndHandThemACard () {
-    const playerArray = []
     for (let j = 1; j <= this.numberOfPlayers; j++) {
       const player = new Player(j)
-      playerArray.push(player)
-      player.cards.push(player.demandACard())
+      this.players.push(player)
+      player.cards.push(this.pile.drawACard())
     }
-    return playerArray
   }
 
   /**
-   * Dealer plays towards all players one at a time, and the result is printed in console.
+   * Dealer plays towards the players one at a time, and prints the result in the console.
    *
-   * @param {object[]} playersArray An array with all player objects.
-   * @param {object[]} dealer A dealer object.
    */
-  #playGameAndPrintResult (playersArray, dealer) {
-    for (let i = 0; i < playersArray.length; i++) {
-      const player = playersArray[i]
-      const gameResult = Round.play(player, dealer)
+  #playGameAndPrintResult () {
+    for (let i = 0; i < this.players.length; i++) {
+      const player = this.players[i]
+      const gameResult = Round.play(player, this.dealer, this.pile)
       console.log(gameResult)
-      discardPile.throwCards(player, dealer)
+      this.pile.throwCardsToDiscardPile(player, this.dealer)
     }
   }
 }

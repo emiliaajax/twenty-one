@@ -8,12 +8,14 @@
 import { Participant } from './Participant.js'
 
 /**
+ * Represents a dealer.
  *
+ * @class
+ * @augments {Participant}
  */
 export class Dealer extends Participant {
   #sum
   #cardRepresentation
-  #result
   /**
    * Creates a Javascript Dealer instance representing a dealer.
    *
@@ -23,7 +25,6 @@ export class Dealer extends Participant {
     this.cards = []
     this.#sum = 0
     this.#cardRepresentation = []
-    this.#result = ''
   }
 
   /**
@@ -36,44 +37,28 @@ export class Dealer extends Participant {
   }
 
   /**
-   * Gets an array of string representations of every card on dealers final hand.
+   * Returns the dealer hand result as a string if dealer won or lost immediately, otherwise returns undefined.
    *
-   * @returns {string[]} An array with string representations of all cards.
+   * @param {object[]} pile A pile object.
+   * @returns {string|undefined} Returns dealer hand result as a string if dealer won or lost immediately, otherwise undefined.
    */
-  get cardRepresentation () {
-    return this.#cardRepresentation
-  }
-
-  /**
-   * Returns the dealers result as a string of 'WIN', 'LOSE' or ''. The empty string means that the result is not decided yet.
-   *
-   */
-  dealerHand () {
+  dealerHand (pile) {
+    let gameResult
     const stop = Math.floor(Math.random() * (19 - 13) + 13)
     const cardsOnHand = this.cards
     let sumOfHand = this.checkSumOfHand(cardsOnHand)
     while (sumOfHand < stop && cardsOnHand.length < 5) {
-      cardsOnHand.push(this.demandACard())
+      cardsOnHand.push(pile.drawACard())
       sumOfHand = this.sumWithOptimalAce(cardsOnHand, stop)
     }
-    this.#result = this.evaluate(cardsOnHand, sumOfHand)
     this.#cardRepresentation = this.cardsAsStrings(cardsOnHand)
     this.#sum = sumOfHand
-  }
-
-  /**
-   * Returns a final game result as a string if the outcome is decided already, otherwise returns undefined.
-   *
-   * @param {object} player A player object.
-   * @returns {string|undefined} Returns game result as a string if outcome is decided, otherwise undefined
-   */
-  checkForImmediateWinOrLoss (player) {
-    let gameResult
-    if (this.#result === 'WIN') {
-      gameResult = `${player.toString()}\n${this.toString()}\nDealer wins!\n`
+    const result = this.evaluate(cardsOnHand, sumOfHand)
+    if (result === 'WIN') {
+      gameResult = `\n${this.toString()}\nDealer wins!\n`
     }
-    if (this.#result === 'LOSE') {
-      gameResult = `${player.toString()}\n${this.toString()} YOU HUGE!\nPlayer wins!\n`
+    if (result === 'LOSE') {
+      gameResult = `\n${this.toString()} YOU HUGE!\nPlayer wins!\n`
     }
     return gameResult
   }
@@ -81,9 +66,9 @@ export class Dealer extends Participant {
   /**
    * Returns a string representing the dealer hand.
    *
-   * @returns {string} A string representing the player hand.
+   * @returns {string} A string representing the dealer hand.
    */
   toString () {
-    return `Dealer   : ${this.cardRepresentation.join(' ')} (${this.sum})`
+    return `Dealer   : ${this.#cardRepresentation.join(' ')} (${this.sum})`
   }
 }

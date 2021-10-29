@@ -5,22 +5,10 @@
  * @version 1.1.0
  */
 
-import { drawPile } from './drawPile.js'
-
 /**
  *
  */
 export class Participant {
-  /**
-   * Returns one card from the draw pile.
-   *
-   * @returns {object} One PlayingCard object from the draw pile.
-   */
-  demandACard () {
-    drawPile.checkPile()
-    return (drawPile.pile).shift()
-  }
-
   /**
    * Returns the sum of all the cards on hand.
    *

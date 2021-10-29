@@ -1,27 +1,35 @@
+/**
+ * Module for the type Round.
+ *
+ * @author Emilia Hansson <eh222yn@student.lnu.se>
+ * @version 1.1.0
+ */
 
 /**
+ * Represents one game round.
  *
- *
+ * @class
  */
 export class Round {
   /**
    * Returns the final result of the game round between a player and a dealer.
    *
-   * @param {object} player A player object.
-   * @param {object} dealer A dealer object.
+   * @param {object} player The current player object.
+   * @param {object} dealer The dealer object.
+   * @param {object[]} pile A pile object.
    * @returns {string} The final result of the game round between player and dealer.
    */
-  static play (player, dealer) {
-    player.playerHand()
-    let gameResult = player.checkForImmediateWinOrLoss()
-    if (!gameResult) {
-      dealer.dealerHand()
-      gameResult = dealer.checkForImmediateWinOrLoss(player)
-      if (!gameResult) {
-        gameResult = this.#compareHands(player, dealer)
+  static play (player, dealer, pile) {
+    let finalResult = player.playerHand(pile)
+    if (!finalResult) {
+      finalResult = dealer.dealerHand(pile)
+      if (!finalResult) {
+        finalResult = this.#compareHands(player, dealer)
+      } else {
+        finalResult = player.toString() + finalResult
       }
     }
-    return gameResult
+    return finalResult
   }
 
   /**
