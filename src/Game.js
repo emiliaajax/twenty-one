@@ -55,7 +55,6 @@ export class Game {
    * Creates a Javascript Game instance representing a game.
    *
    * @param {number} numberOfPlayers The number of players.
-   * @private
    */
   constructor (numberOfPlayers) {
     this.#numberOfPlayers = numberOfPlayers
@@ -67,7 +66,6 @@ export class Game {
   /**
    * Starts game and prints final game result in console.
    *
-   * @public
    */
   start () {
     this.#createPlayersAndHandThemACard()
@@ -82,7 +80,6 @@ export class Game {
   /**
    * Returns an array with all players where all has been given one card each.
    *
-   * @private
    */
   #createPlayersAndHandThemACard () {
     for (let j = 1; j <= this.#numberOfPlayers; j++) {
@@ -96,7 +93,6 @@ export class Game {
    * Returns the final result of the game round between a player and a dealer.
    *
    * @returns {string} The final result of the game round between player and dealer.
-   * @private
    */
   #playRound () {
     let finalResult = this.#currentPlayer.playerHand(this.#playingCards)
@@ -115,7 +111,6 @@ export class Game {
    * Returns the game result after comparing player and dealer hands.
    *
    * @returns {string} A string with the final result.
-   * @private
    */
   #compareHands () {
     let gameResult = ''

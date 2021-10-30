@@ -15,6 +15,21 @@ import { DrawPileError } from './DrawPileError.js'
  */
 export class PlayingCards {
   /**
+   * A shuffled array with PlayingCard objects.
+   *
+   * @type {object[]}
+   * @public
+   */
+  drawPile
+  /**
+   * An empty array to hold the thrown PlayingCard objects.
+   *
+   * @type {Array}
+   * @public
+   */
+  discardPile
+
+  /**
    * Creates a Javascript PlayingCards instance representing playing cards.
    *
    */

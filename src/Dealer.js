@@ -15,17 +15,27 @@ import { Participant } from './Participant.js'
  */
 export class Dealer extends Participant {
   /**
+   * An empty array to hold the cards of the dealer.
+   *
+   * @type {Array}
+   * @public
+   */
+  cards
+  /**
    * The total sum of dealer hand.
    *
    * @type {number}
+   * @private
    */
   #sum
   /**
    * The cards represented as an array of strings.
    *
    * @type {string[]}
+   * @private
    */
   #cardRepresentation
+
   /**
    * Creates a Javascript Dealer instance representing a dealer.
    *

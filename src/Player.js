@@ -15,23 +15,34 @@ import { Participant } from './Participant.js'
  */
 export class Player extends Participant {
   /**
+   * An empty array to hold the cards of the current player.
+   *
+   * @type {Array}
+   * @public
+   */
+   cards
+  /**
    * The number of the player.
    *
    * @type {number}
+   * @private
    */
   #playerNumber
   /**
    * The total sum of player hand.
    *
    * @type {number}
+   * @private
    */
   #sum
   /**
    * The cards represented as an array of strings.
    *
    * @type {string[]}
+   * @private
    */
   #cardRepresentation
+
   /**
    * Creates a Javascript Player instance representing a player.
    *
@@ -40,15 +51,16 @@ export class Player extends Participant {
   constructor (playerNumber) {
     super()
     this.#playerNumber = playerNumber
-    this.cards = []
     this.#sum = 0
     this.#cardRepresentation = []
+    this.cards = []
   }
 
   /**
    * Gets the final sum of the player hand.
    *
    * @returns {number} The sum of the final hand of the player.
+   * @readonly
    */
   get sum () {
     return this.#sum
