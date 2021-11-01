@@ -99,7 +99,7 @@ export class Game {
     if (!finalResult) {
       finalResult = this.#dealer.dealerHand(this.#playingCards)
       if (!finalResult) {
-        finalResult = this.#compareHands(this.#currentPlayer)
+        finalResult = this.#compareHands()
       } else {
         finalResult = this.#currentPlayer.toString() + finalResult
       }
