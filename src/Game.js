@@ -84,8 +84,8 @@ export class Game {
   #createPlayersAndHandThemACard () {
     for (let j = 1; j <= this.#numberOfPlayers; j++) {
       this.#currentPlayer = new Player(j)
-      this.#players.push(this.#currentPlayer)
       this.#currentPlayer.cards.push(this.#playingCards.drawACard())
+      this.#players.push(this.#currentPlayer)
     }
   }
 
@@ -95,9 +95,9 @@ export class Game {
    * @returns {string} The final result of the game round between player and dealer.
    */
   #playRound () {
-    let finalResult = this.#currentPlayer.playerHand(this.#playingCards)
+    let finalResult = this.#currentPlayer.hand(this.#playingCards)
     if (!finalResult) {
-      finalResult = this.#dealer.dealerHand(this.#playingCards)
+      finalResult = this.#dealer.hand(this.#playingCards)
       if (!finalResult) {
         finalResult = this.#compareHands()
       } else {

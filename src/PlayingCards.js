@@ -74,10 +74,14 @@ export class PlayingCards {
    */
   throwCardsToDiscardPile (player, dealer) {
     const allCards = player.cards.concat(dealer.cards)
-    player.cards = []
-    dealer.cards = []
     for (let k = 0; k < allCards.length; k++) {
       this.discardPile.push(allCards[k])
     }
+    player.cards = []
+    player.cardRepresentation = []
+    player.sum = 0
+    dealer.cards = []
+    dealer.cardRepresentation = []
+    dealer.sum = 0
   }
 }

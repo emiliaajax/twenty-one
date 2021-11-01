@@ -5,22 +5,12 @@
  * @version 1.1.0
  */
 
-import { Participant } from './Participant.js'
-
 /**
  * Represents a player.
  *
  * @class
- * @augments {Participant}
  */
-export class Player extends Participant {
-  /**
-   * An empty array to hold the cards of the current player.
-   *
-   * @type {Array}
-   * @public
-   */
-   cards
+export class Player {
   /**
    * The number of the player.
    *
@@ -29,19 +19,33 @@ export class Player extends Participant {
    */
   #playerNumber
   /**
-   * The total sum of player hand.
+   * An empty array to hold the cards of the drawn cards.
+   *
+   * @type {Array}
+   * @public
+   */
+  cards
+  /**
+   * An empty array to hold the string representations of the cards.
+   *
+   * @type {Array}
+   * @public
+   */
+  cardRepresentation
+  /**
+   * The total sum of the hand.
    *
    * @type {number}
-   * @private
+   * @public
    */
-  #sum
+  sum
   /**
-   * The cards represented as an array of strings.
+   * The stop limit.
    *
-   * @type {string[]}
-   * @private
+   * @type {number}
+   * @public
    */
-  #cardRepresentation
+  stop
 
   /**
    * Creates a Javascript Player instance representing a player.
@@ -49,41 +53,29 @@ export class Player extends Participant {
    * @param {number} playerNumber The number of the player.
    */
   constructor (playerNumber) {
-    super()
     this.#playerNumber = playerNumber
-    this.#sum = 0
-    this.#cardRepresentation = []
     this.cards = []
+    this.sum = 0
+    this.cardRepresentation = []
+    this.stop = Math.floor(Math.random() * (19 - 13) + 13)
   }
 
   /**
-   * Gets the final sum of the player hand.
-   *
-   * @returns {number} The sum of the final hand of the player.
-   * @readonly
-   */
-  get sum () {
-    return this.#sum
-  }
-
-  /**
-   * Returns the player hand as a string if player won or lost immediately, otherwise returns undefined.
+   * Returns the hand as a string representation if player won or lost immediately, otherwise returns undefined.
    *
    * @param {object} playingCards A playingCard object.
-   * @returns {string|undefined} The player hand as a string if dealer won or lost immediately, otherwise undefined.
+   * @returns {string | undefined} The hand as a string representation if player won or lost immediately, otherwise undefined.
    */
-  playerHand (playingCards) {
+  hand (playingCards) {
     let gameResult
-    const stop = Math.floor(Math.random() * (19 - 13) + 13)
-    const cardsOnHand = this.cards
-    let sumOfHand = this.checkSumOfHand(cardsOnHand)
-    while ((sumOfHand < stop && cardsOnHand.length < 5) || cardsOnHand.length < 2) {
-      cardsOnHand.push(playingCards.drawACard())
-      sumOfHand = this.sumWithOptimalAce(cardsOnHand, stop)
+    this.checkSumOfHand()
+    while ((this.sum < this.stop && this.cards.length < 5) || this.cards.length < 2) {
+      this.cards.push(playingCards.drawACard())
+      this.checkSumOfHand()
+      this.sumWithOptimalAce()
     }
-    this.#cardRepresentation = this.cardsAsStrings(cardsOnHand)
-    this.#sum = sumOfHand
-    const result = this.evaluate(cardsOnHand, sumOfHand)
+    this.cardsAsStrings()
+    const result = this.evaluate()
     if (result === 'WIN') {
       gameResult = `${this.toString()}\nDealer   : -\nPlayer wins!\n`
     }
@@ -94,11 +86,66 @@ export class Player extends Participant {
   }
 
   /**
+   * Calculates the sum of all cards on hand.
+   *
+   */
+  checkSumOfHand () {
+    let newSum = 0
+    for (let i = 0; i < this.cards.length; i++) {
+      const currentCardValue = this.cards[i].valueOf()
+      newSum += currentCardValue
+    }
+    this.sum = newSum
+  }
+
+  /**
+   * Returns the outcome of the current hand as a string.
+   *
+   * @returns {string} The outcome as a string.
+   */
+  evaluate () {
+    let outcome = ''
+    if ((this.cards.length === 5 && this.sum < 21) || this.sum === 21) {
+      outcome = 'WIN'
+    } else if (this.sum > 21) {
+      outcome = 'LOSE'
+    }
+    return outcome
+  }
+
+  /**
+   * Chooses the optimal value of ace for the current hand.
+   *
+   */
+  sumWithOptimalAce () {
+    const cardsCopy = Array.from(this.cards)
+    for (let i = 0; i < this.cards.length; i++) {
+      if (cardsCopy[i].rank === 1) {
+        const altSumOfHand = this.sum + 13
+        if (altSumOfHand > this.sum && altSumOfHand >= this.stop && altSumOfHand <= 21) {
+          this.sum = altSumOfHand
+        }
+      }
+    }
+  }
+
+  /**
+   * Creates a string array representation of the current hand.
+   *
+   */
+  cardsAsStrings () {
+    for (let i = 0; i < this.cards.length; i++) {
+      const currentCardString = this.cards[i].toString()
+      this.cardRepresentation.push(currentCardString)
+    }
+  }
+
+  /**
    * Returns a string representing the player hand.
    *
    * @returns {string} A string representing the player hand.
    */
   toString () {
-    return `Player #${this.#playerNumber}: ${this.#cardRepresentation.join(' ')} (${this.#sum})`
+    return `Player #${this.#playerNumber}: ${this.cardRepresentation.join(' ')} (${this.sum})`
   }
 }

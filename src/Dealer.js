@@ -5,75 +5,31 @@
  * @version 1.1.0
  */
 
-import { Participant } from './Participant.js'
+import { Player } from './Player.js'
 
 /**
  * Represents a dealer.
  *
  * @class
- * @augments {Participant}
+ * @augments {Player}
  */
-export class Dealer extends Participant {
+export class Dealer extends Player {
   /**
-   * An empty array to hold the cards of the dealer.
-   *
-   * @type {Array}
-   * @public
-   */
-  cards
-  /**
-   * The total sum of dealer hand.
-   *
-   * @type {number}
-   * @private
-   */
-  #sum
-  /**
-   * The cards represented as an array of strings.
-   *
-   * @type {string[]}
-   * @private
-   */
-  #cardRepresentation
-
-  /**
-   * Creates a Javascript Dealer instance representing a dealer.
-   *
-   */
-  constructor () {
-    super()
-    this.cards = []
-    this.#sum = 0
-    this.#cardRepresentation = []
-  }
-
-  /**
-   * Gets the final sum of dealer hand.
-   *
-   * @returns {number} The sum of the final hand of the dealer.
-   */
-  get sum () {
-    return this.#sum
-  }
-
-  /**
-   * Returns the dealer hand as a string if dealer won or lost immediately, otherwise returns undefined.
+   * Returns the hand as a string representation if dealer won or lost immediately, otherwise returns undefined.
    *
    * @param {object} playingCards A playingCards object.
-   * @returns {string|undefined} The dealer hand as a string if dealer won or lost immediately, otherwise undefined.
+   * @returns {string | undefined} The hand as a string representation if dealer won or lost immediately, otherwise undefined.
    */
-  dealerHand (playingCards) {
+  hand (playingCards) {
     let gameResult
-    const stop = Math.floor(Math.random() * (19 - 13) + 13)
-    const cardsOnHand = this.cards
-    let sumOfHand = this.checkSumOfHand(cardsOnHand)
-    while (sumOfHand < stop && cardsOnHand.length < 5) {
-      cardsOnHand.push(playingCards.drawACard())
-      sumOfHand = this.sumWithOptimalAce(cardsOnHand, stop)
+    this.stop = Math.floor(Math.random() * (19 - 13) + 13)
+    while (this.sum < this.stop && this.cards.length < 5) {
+      this.cards.push(playingCards.drawACard())
+      this.checkSumOfHand()
+      this.sumWithOptimalAce()
     }
-    this.#cardRepresentation = this.cardsAsStrings(cardsOnHand)
-    this.#sum = sumOfHand
-    const result = this.evaluate(cardsOnHand, sumOfHand)
+    this.cardsAsStrings()
+    const result = this.evaluate()
     if (result === 'WIN') {
       gameResult = `\n${this.toString()}\nDealer wins!\n`
     }
@@ -84,11 +40,11 @@ export class Dealer extends Participant {
   }
 
   /**
-   * Returns a string representing the dealer hand.
+   * Returns a string representating the dealer hand.
    *
    * @returns {string} A string representing the dealer hand.
    */
   toString () {
-    return `Dealer   : ${this.#cardRepresentation.join(' ')} (${this.sum})`
+    return `Dealer   : ${this.cardRepresentation.join(' ')} (${this.sum})`
   }
 }
