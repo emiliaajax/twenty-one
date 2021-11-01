@@ -44,12 +44,12 @@ export class Game {
    */
   #players
   /**
-   * An instance of type Player.
+   * A Player object.
    *
    * @type {Player}
    * @private
    */
-  #currentPlayer
+  #player
 
   /**
    * Creates a Javascript Game instance representing a game.
@@ -70,10 +70,10 @@ export class Game {
   start () {
     this.#createPlayersAndHandThemACard()
     for (let i = 0; i < this.#players.length; i++) {
-      this.#currentPlayer = this.#players[i]
+      this.#player = this.#players[i]
       const gameResult = this.#playRound()
       console.log(gameResult)
-      this.#playingCards.throwCardsToDiscardPile(this.#currentPlayer, this.#dealer)
+      this.#playingCards.throwCardsToDiscardPile(this.#player, this.#dealer)
     }
   }
 
@@ -83,9 +83,9 @@ export class Game {
    */
   #createPlayersAndHandThemACard () {
     for (let j = 1; j <= this.#numberOfPlayers; j++) {
-      this.#currentPlayer = new Player(j)
-      this.#currentPlayer.cards.push(this.#playingCards.drawACard())
-      this.#players.push(this.#currentPlayer)
+      const player = new Player(j)
+      player.cards.push(this.#playingCards.drawACard())
+      this.#players.push(player)
     }
   }
 
@@ -95,13 +95,13 @@ export class Game {
    * @returns {string} The final result of the game round between player and dealer.
    */
   #playRound () {
-    let finalResult = this.#currentPlayer.hand(this.#playingCards)
+    let finalResult = this.#player.hand(this.#playingCards)
     if (!finalResult) {
       finalResult = this.#dealer.hand(this.#playingCards)
       if (!finalResult) {
         finalResult = this.#compareHands()
       } else {
-        finalResult = this.#currentPlayer.toString() + finalResult
+        finalResult = this.#player.toString() + finalResult
       }
     }
     return finalResult
@@ -114,10 +114,10 @@ export class Game {
    */
   #compareHands () {
     let gameResult = ''
-    if (this.#currentPlayer.sum > this.#dealer.sum) {
-      gameResult = `${this.#currentPlayer.toString()}\n${this.#dealer.toString()}\nPlayer wins!\n`
+    if (this.#player.sum > this.#dealer.sum) {
+      gameResult = `${this.#player.toString()}\n${this.#dealer.toString()}\nPlayer wins!\n`
     } else {
-      gameResult = `${this.#currentPlayer.toString()}\n${this.#dealer.toString()}\nDealer wins!\n`
+      gameResult = `${this.#player.toString()}\n${this.#dealer.toString()}\nDealer wins!\n`
     }
     return gameResult
   }
