@@ -19,7 +19,7 @@ export class Player {
    */
   #playerNumber
   /**
-   * An empty array to hold the cards of the drawn cards.
+   * An empty array to hold the drawn cards.
    *
    * @type {Array}
    * @public
@@ -68,14 +68,7 @@ export class Player {
    */
   hand (playingCards) {
     let gameResult
-    this.checkSumOfHand()
-    while ((this.sum < this.stop && this.cards.length < 5) || this.cards.length < 2) {
-      this.cards.push(playingCards.drawACard())
-      this.checkSumOfHand()
-      this.sumWithOptimalAce()
-    }
-    this.cardsAsStrings()
-    const result = this.evaluate()
+    const result = this.drawCardsUntilHappy(playingCards)
     if (result === 'WIN') {
       gameResult = `${this.toString()}\nDealer   : -\nPlayer wins!\n`
     }
@@ -83,6 +76,22 @@ export class Player {
       gameResult = `${this.toString()} YOU HUGE!\nDealer   : -\nDealer wins!\n`
     }
     return gameResult
+  }
+
+  /**
+   * Returns 'WIN' or 'LOSE' for immediate win or loss, otherwise an empty string.
+   *
+   * @param {*} playingCards A playingCards object.
+   * @returns {string} A string with the result.
+   */
+  drawCardsUntilHappy (playingCards) {
+    while (this.sum < this.stop && this.cards.length < 5) {
+      this.cards.push(playingCards.drawACard())
+      this.checkSumOfHand()
+      this.sumWithOptimalAce()
+    }
+    this.cardsAsStrings()
+    return this.evaluate()
   }
 
   /**

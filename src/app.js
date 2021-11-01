@@ -13,18 +13,15 @@ import { DrawPileError } from './DrawPileError.js'
 import process from 'process'
 
 try {
-  const howManyPlayers = Array.from(process.argv)
   let numberOfPlayers
-
-  if (howManyPlayers.length === 2) {
+  if (process.argv.length === 2) {
     numberOfPlayers = 3
   } else {
-    numberOfPlayers = Number(howManyPlayers[2])
+    numberOfPlayers = Number(process.argv[2])
     if (numberOfPlayers <= 0 || (numberOfPlayers > 7 && numberOfPlayers !== 20 && numberOfPlayers !== 50) || Number.isNaN(numberOfPlayers) || process.argv.length > 3 || !Number.isInteger(numberOfPlayers)) {
       throw new PlayerError('Invalid number of players')
     }
   }
-
   const game = new Game(numberOfPlayers)
   game.start()
 } catch (e) {
