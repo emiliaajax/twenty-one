@@ -14,6 +14,7 @@ import process from 'process'
 
 try {
   let numberOfPlayers
+
   if (process.argv.length === 2) {
     numberOfPlayers = 3
   } else {
@@ -22,6 +23,7 @@ try {
       throw new PlayerError('Invalid number of players')
     }
   }
+
   const game = new Game(numberOfPlayers)
   game.start()
 } catch (e) {
