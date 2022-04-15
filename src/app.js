@@ -25,6 +25,7 @@ try {
   }
 
   const game = new Game(numberOfPlayers)
+
   game.start()
 } catch (e) {
   console.error(e.message)
